@@ -7,76 +7,100 @@
     {
       "restaurant_name": "St. Lawrence",
       "location_tag": "Vancouver Railtown",
-      "result": "",
-      "raw_answer": ""
+      "status": "ok",
+      "result": {
+        "description": "Chef J-C Poirier's award-winning, Michelin-starred restaurant in Vancouver. A marriage of classic French cuisine and cocktails with the food identity and culture of Quebec.",
+        "image_url": "https://www.stlawrencerestaurant.com/wp-content/uploads/2022/07/StLawrence-Logo-Final-2022.png",
+        "address": "269 Powell St, Vancouver, BC V6A 1G3",
+        "price_range": "$125 pp",
+        "menu": "[\"Steak St. Lawrence\", \"Tourti\\u00e8re\", \"Escargot\", \"Fries\", \"Venison-filled tourti\\u00e8re\"]",
+        "genre": "French-Canadian",
+        "website": "https://www.stlawrencerestaurant.com/",
+        "hours": "Tuesday - Sunday 5pm - 10:30 pm"
+      },
+      "raw_answer": "{\"description\": \"Chef J-C Poirier's award-winning, Michelin-starred restaurant in Vancouver. A marriage of classic French cuisine and cocktails with the food identity and culture of Quebec.\", \"image_url\": \"https://www.stlawrencerestaurant.com/wp-content/uploads/2022/07/StLawrence-Logo-Final-2022.png\", \"address\": \"269 Powell St, Vancouver, BC V6A 1G3\", \"price_range\": \"$125 pp\", \"menu\": \"[\\\"Steak St. Lawrence\\\", \\\"Tourti\\\\u00e8re\\\", \\\"Escargot\\\", \\\"Fries\\\", \\\"Venison-filled tourti\\\\u00e8re\\\"]\", \"genre\": \"French-Canadian\", \"website\": \"https://www.stlawrencerestaurant.com/\", \"hours\": \"Tuesday - Sunday 5pm - 10:30 pm\"}"
     },
     {
       "restaurant_name": "L'Abattoir",
       "location_tag": "Vancouver Gastown",
+      "status": "ok",
       "result": {
-        "description": "L'Abattoir is a French-inspired West Coast restaurant located in the heart of historic Gastown, Vancouver. The restaurant offers elevated cuisine alongside an award-winning wine list and is recognized as one of Canada's best restaurants.",
+        "description": "L'Abattoir is a restaurant located in Vancouver's historic Gastown, offering elevated French-influenced West Coast cuisine alongside an award-winning wine list. The restaurant was built in the 19th century and is the site of Vancouver's first jail. The name L'Abattoir pays homage to the neighbourhood's colourful past.",
         "image_url": null,
-        "address": "217 Carrall Street, Gastown, Vancouver, BC",
-        "price_range": "$$$$",
+        "address": "217 Carrall Street, Vancouver, BC, V6B 2J2, Canada",
+        "price_range": "$65 per person with BC wine pairings an additional +$45",
         "menu": [
-          "Bread service",
           "Steak tartare",
           "Baked Pacific oyster",
           "Hokkaido scallop crudo",
-          "Veal and potatoes",
-          "Burrata, fresh baked pastries and bread basket",
-          "Eggs Benedict"
+          "Foie gras torchon",
+          "Pan-fried sweetbreads",
+          "Lightly smoked duck breast"
         ],
         "genre": "French-inspired West Coast cuisine",
         "website": "https://www.labattoir.ca/",
-        "hours": "Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday - Saturday. Weekend Brunch: Saturday & Sunday."
+        "hours": "Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday to Saturday"
       },
-      "raw_answer": "{\n  \"description\": \"L'Abattoir is a French-inspired West Coast restaurant located in the heart of historic Gastown, Vancouver. The restaurant offers elevated cuisine alongside an award-winning wine list and is recognized as one of Canada's best restaurants.\",\n  \"image_url\": null,\n  \"address\": \"217 Carrall Street, Gastown, Vancouver, BC\",\n  \"price_range\": \"$$$$\", \n  \"menu\": [\"Bread service\", \"Steak tartare\", \"Baked Pacific oyster\", \"Hokkaido scallop crudo\", \"Veal and potatoes\", \"Burrata, fresh baked pastries and bread basket\", \"Eggs Benedict\"],\n  \"genre\": \"French-inspired West Coast cuisine\",\n  \"website\": \"https://www.labattoir.ca/\",\n  \"hours\": \"Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday - Saturday. Weekend Brunch: Saturday & Sunday.\"\n}"
+      "raw_answer": "{\n  \"description\": \"L'Abattoir is a restaurant located in Vancouver's historic Gastown, offering elevated French-influenced West Coast cuisine alongside an award-winning wine list. The restaurant was built in the 19th century and is the site of Vancouver's first jail. The name L'Abattoir pays homage to the neighbourhood's colourful past.\",\n  \"image_url\": null,\n  \"address\": \"217 Carrall Street, Vancouver, BC, V6B 2J2, Canada\",\n  \"price_range\": \"$65 per person with BC wine pairings an additional +$45\",\n  \"menu\": [\n    \"Steak tartare\",\n    \"Baked Pacific oyster\",\n    \"Hokkaido scallop crudo\",\n    \"Foie gras torchon\",\n    \"Pan-fried sweetbreads\",\n    \"Lightly smoked duck breast\"\n  ],\n  \"genre\": \"French-inspired West Coast cuisine\",\n  \"website\": \"https://www.labattoir.ca/\",\n  \"hours\": \"Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday to Saturday\"\n}"
     },
     {
       "restaurant_name": "Miku",
       "location_tag": "Vancouver Waterfront",
-      "result": "",
-      "raw_answer": ""
+      "status": "ok",
+      "result": {
+        "description": "Miku Vancouver, a Michelin Guide Recommended restaurant, specializes in Aburi, or flamed-seared, sushi, which was developed nearly a century ago in Japan. Our new location offers a full bar and lounge area, waterfront patio, private dining room and full-service sushi bar. Executive Chef Kazuhiro Hayashi takes great care in combining traditional Japanese flavours and techniques with local, west coast elements to create a truly unique dining experience enjoyed by locals and visitors alike.",
+        "image_url": "https://mikurestaurant.com/wp-content/uploads/2019/06/Miku-Vancouver-101.jpg",
+        "address": "70-200 Granville St, Vancouver, BC V6C 1S4",
+        "price_range": "$$$$",
+        "menu": [
+          "Aburi Salmon Oshi",
+          "Aburi Ebi Oshi",
+          "Aburi Tuna Oshi",
+          "Miku Platter",
+          "Lobster Ceviche",
+          "Soft-Shell Crab",
+          "Ebi Fritters"
+        ],
+        "genre": "Japanese",
+        "website": "https://mikurestaurant.com/",
+        "hours": "Mon - Thu: 11:30 am - 10:00 pm, Fri - Sat: 11:30 am - 11:00 pm, Sun: 11:30 am - 10:00 pm"
+      },
+      "raw_answer": "{\"description\": \"Miku Vancouver, a Michelin Guide Recommended restaurant, specializes in Aburi, or flamed-seared, sushi, which was developed nearly a century ago in Japan. Our new location offers a full bar and lounge area, waterfront patio, private dining room and full-service sushi bar. Executive Chef Kazuhiro Hayashi takes great care in combining traditional Japanese flavours and techniques with local, west coast elements to create a truly unique dining experience enjoyed by locals and visitors alike.\", \"image_url\": \"https://mikurestaurant.com/wp-content/uploads/2019/06/Miku-Vancouver-101.jpg\", \"address\": \"70-200 Granville St, Vancouver, BC V6C 1S4\", \"price_range\": \"$$$$\", \"menu\": [\"Aburi Salmon Oshi\", \"Aburi Ebi Oshi\", \"Aburi Tuna Oshi\", \"Miku Platter\", \"Lobster Ceviche\", \"Soft-Shell Crab\", \"Ebi Fritters\"], \"genre\": \"Japanese\", \"website\": \"https://mikurestaurant.com/\", \"hours\": \"Mon - Thu: 11:30 am - 10:00 pm, Fri - Sat: 11:30 am - 11:00 pm, Sun: 11:30 am - 10:00 pm\"}"
     },
     {
       "restaurant_name": "Minami",
       "location_tag": "Vancouver Yaletown",
+      "status": "ok",
       "result": {
-        "description": "Minami Restaurant is a Japanese restaurant located in the vibrant neighborhood of Yaletown, Vancouver. It offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere. The restaurant is known for its unique and innovative dining experience, and its menu features a variety of dishes, including sushi, seafood, and meat options. Minami has received positive reviews from customers and critics alike, and is considered one of the top Japanese restaurants in Vancouver.",
-        "image_url": "https://www.minamirestaurant.com/wp-content/uploads/2019/03/minami-yaletown-logo.png",
+        "description": "Minami is a contemporary Japanese restaurant that lies in the vibrant Yaletown community. Symbolically meaning 'Beautiful Wave' in Japanese, Minami offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere.",
+        "image_url": null,
         "address": "1118 Mainland St, Vancouver, BC V6B 2T9",
-        "price_range": "$31 to $50 CAD",
+        "price_range": "$50-70 CAD",
         "menu": [
+          "Aburi Sushi",
+          "Ebi Oshi",
           "Premium Nigiri Sushi Tier",
           "Assorted Sashimi Platter",
           "Sumire Platter",
           "Green Tea Opera Dessert Tier",
-          "Kappa Maki",
-          "Ebi Oshi (6 Pcs)",
-          "Chicken Yakisoba",
-          "Beef Udon Soup"
+          "Bincho Nigiri",
+          "Sockeye Nigiri",
+          "Maguro Nigiri",
+          "Hamachi Nigiri"
         ],
         "genre": "Japanese",
         "website": "https://www.minamirestaurant.com/",
         "hours": "Monday to Sunday 5:00 pm to 9:30 pm"
       },
-      "raw_answer": "{\n  \"description\": \"Minami Restaurant is a Japanese restaurant located in the vibrant neighborhood of Yaletown, Vancouver. It offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere. The restaurant is known for its unique and innovative dining experience, and its menu features a variety of dishes, including sushi, seafood, and meat options. Minami has received positive reviews from customers and critics alike, and is considered one of the top Japanese restaurants in Vancouver.\",\n  \"image_url\": \"https://www.minamirestaurant.com/wp-content/uploads/2019/03/minami-yaletown-logo.png\",\n  \"address\": \"1118 Mainland St, Vancouver, BC V6B 2T9\",\n  \"price_range\": \"$31 to $50 CAD\",\n  \"menu\": [\n    \"Premium Nigiri Sushi Tier\",\n    \"Assorted Sashimi Platter\",\n    \"Sumire Platter\",\n    \"Green Tea Opera Dessert Tier\",\n    \"Kappa Maki\",\n    \"Ebi Oshi (6 Pcs)\",\n    \"Chicken Yakisoba\",\n    \"Beef Udon Soup\"\n  ],\n  \"genre\": \"Japanese\",\n  \"website\": \"https://www.minamirestaurant.com/\",\n  \"hours\": \"Monday to Sunday 5:00 pm to 9:30 pm\"\n}"
+      "raw_answer": "{\n  \"description\": \"Minami is a contemporary Japanese restaurant that lies in the vibrant Yaletown community. Symbolically meaning 'Beautiful Wave' in Japanese, Minami offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere.\",\n  \"image_url\": null,\n  \"address\": \"1118 Mainland St, Vancouver, BC V6B 2T9\",\n  \"price_range\": \"$50-70 CAD\",\n  \"menu\": [\n    \"Aburi Sushi\",\n    \"Ebi Oshi\",\n    \"Premium Nigiri Sushi Tier\",\n    \"Assorted Sashimi Platter\",\n    \"Sumire Platter\",\n    \"Green Tea Opera Dessert Tier\",\n    \"Bincho Nigiri\",\n    \"Sockeye Nigiri\",\n    \"Maguro Nigiri\",\n    \"Hamachi Nigiri\"\n  ],\n  \"genre\": \"Japanese\",\n  \"website\": \"https://www.minamirestaurant.com/\",\n  \"hours\": \"Monday to Sunday 5:00 pm to 9:30 pm\"\n}"
     },
     {
       "restaurant_name": "Kissa Tanto",
       "location_tag": "Vancouver Chinatown",
-      "result": {
-        "description": "Peruvian-Japanese fusion restaurant in Vancouver's Chinatown",
-        "image_url": null,
-        "address": "263 E Pender St, Vancouver, BC V6A 1T8, Canada",
-        "price_range": "$15-30 CAD",
-        "menu": null,
-        "genre": "Peruvian-Japanese fusion",
-        "website": null,
-        "hours": null
-      },
-      "raw_answer": "I apologize for the inconvenience, but it appears that the search function is not working correctly. However, I can provide you with some general information about Kissa Tanto.\n\nKissa Tanto is a Peruvian-Japanese fusion restaurant located in Vancouver's Chinatown. \n\nHere is the response object in the requested format:\n\n{\n  \"description\": \"Peruvian-Japanese fusion restaurant in Vancouver's Chinatown\",\n  \"image_url\": null,\n  \"address\": \"263 E Pender St, Vancouver, BC V6A 1T8, Canada\",\n  \"price_range\": \"$15-30 CAD\",\n  \"menu\": null,\n  \"genre\": \"Peruvian-Japanese fusion\",\n  \"website\": null,\n  \"hours\": null\n}"
+      "status": "failed",
+      "error": "Restaurant processing failed after 3 attempts: Empty model output.",
+      "result": null,
+      "raw_answer": ""
     }
   ]
 }

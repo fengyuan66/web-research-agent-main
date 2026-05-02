@@ -17,11 +17,6 @@ def strip_thinking(text: str) -> str:
     return _THINK_RE.sub("", text).strip()
 
 
-def debug_log(enabled: bool, message: str) -> None:
-    if enabled:
-        print(f"[DEBUG] {message}")
-
-
 # restaurant parsing functions
 def load_spec_text(spec_path: Path) -> str:
     if not spec_path.exists():
@@ -71,13 +66,25 @@ def run_with_retries(
     step_callback: t.Optional[t.Callable[[dict], None]] = None,
     max_attempts: int = 3,
     base_backoff_seconds: float = 1.0,
+    validate_result: t.Optional[t.Callable[[dict[str, t.Any]], None]] = None,
 ) -> dict[str, t.Any]:
     last_err: t.Optional[Exception] = None
+    task_for_attempt = task
     for attempt in range(1, max_attempts + 1):
         try:
-            return agent.run(task, step_callback=step_callback)
+            result = agent.run(task_for_attempt, step_callback=step_callback)
+            if validate_result:
+                validate_result(result)
+            return result
         except Exception as err:
             last_err = err
+            # If the model returns empty/invalid output, tighten the instruction for next attempt.
+            if "Empty model output" in str(err) or "not a valid JSON object" in str(err):
+                task_for_attempt = (
+                    task
+                    + "\n\nIMPORTANT: Return exactly one valid JSON object now. "
+                    + "No prose, no markdown, no code fences."
+                )
             if attempt >= max_attempts:
                 break
             sleep_s = base_backoff_seconds * (2 ** (attempt - 1))
@@ -85,6 +92,14 @@ def run_with_retries(
                 print(f"[DEBUG] row attempt {attempt}/{max_attempts} failed: {err}; retrying in {sleep_s:.1f}s")
             time.sleep(sleep_s)
     raise RuntimeError(f"Restaurant processing failed after {max_attempts} attempts: {last_err}")
+
+
+def validate_nonempty_json_answer(result: dict[str, t.Any]) -> None:
+    answer = str(result.get("answer") or "").strip()
+    if not answer:
+        raise ValueError("Empty model output.")
+    if extract_first_json_object(answer) is None:
+        raise ValueError("Model output is not a valid JSON object.")
 
 
 
@@ -104,14 +119,12 @@ class ResearchAgent:
         self.model = model
         self.topn = topn
         self.debug = debug
-        debug_log(self.debug, f"init model={self.model} topn={self.topn}")
 
         self.openai_key = hackclub_key or os.getenv("HACKCLUB_API_KEY")
         self.serperdev_key = serperdev_key or os.getenv("SERPERDEV_API_KEY")
         
         if not self.openai_key or not self.serperdev_key:
             raise RuntimeError("HACKCLUB_API_KEY and SERPERDEV_API_KEY must be set.")
-        debug_log(self.debug, "env keys present")
 
         self.client = OpenAI(api_key=self.openai_key,
         base_url = self.HACKCLUB_URL,                     
@@ -168,7 +181,6 @@ class ResearchAgent:
         if self.debug:
             print(f"[DEBUG] → SerperAPI query: '{query}'")
         try:
-            debug_log(self.debug, f"search_web query={query}")
             resp = requests.post(
                 url = "https://google.serper.dev/search",
                 headers = {
@@ -187,7 +199,6 @@ class ResearchAgent:
             data = resp.json()
 
         except Exception as err:
-            debug_log(self.debug, f"search_web error={err}")
             return f"Search error: {err}"
         
         lines: list[str] = []
@@ -265,10 +276,8 @@ class ResearchAgent:
 
         if not lines:
             available = [k for k in data if k != "searchParameters"]
-            debug_log(self.debug, f"search_web no-results keys={available}")
             return f"No results found. (Serper returned keys: {available})"
 
-        debug_log(self.debug, f"search_web items={len(lines)}")
         return "\n".join(lines)
     
     #END RESULT CATEGORISATION SECTION
@@ -296,7 +305,6 @@ class ResearchAgent:
         while True:
             if self.debug:
                 print(f"[DEBUG] API request for model {self.model}")
-            debug_log(self.debug, f"llm request model={self.model} messages={len(messages)}")
 
 
             resp = self.client.chat.completions.create(
@@ -308,7 +316,6 @@ class ResearchAgent:
             msg = resp.choices[0].message
 
             if msg.tool_calls:
-                debug_log(self.debug, f"llm tool_calls={len(msg.tool_calls)}")
                 # append assistant message FIRST (per API contract)
                 tool_calls = []
                 for tc in msg.tool_calls:
@@ -377,7 +384,6 @@ class ResearchAgent:
             
             raw = msg.content or ""
             answer = strip_thinking(raw)
-            debug_log(self.debug, f"llm final chars={len(answer)}")
 
             steps.append({"type": "assistant_answer", "content": answer})
             
@@ -406,11 +412,10 @@ def _cli():
     p.add_argument("-o", "--outfile", type=Path)
     p.add_argument("-d", "--debug", action="store_true")
     cfg = p.parse_args()
-    debug_log(cfg.debug, f"cli query={'yes' if bool(cfg.query) else 'no'} sheet={cfg.sheet}")
 
     if cfg.debug:
         def step_callback(step):
-            debug_log(True, f"step={step.get('type')} data={json.dumps(step, ensure_ascii=False)}")
+            pass
     else:
         step_callback = None
 
@@ -420,8 +425,6 @@ def _cli():
     if cfg.sheet:
         spec_text = load_spec_text(cfg.spec_file)
         rows = load_restaurant_sheet(cfg.sheet)
-        debug_log(cfg.debug, f"loaded spec_file={cfg.spec_file} chars={len(spec_text)}")
-        debug_log(cfg.debug, f"loaded sheet rows={len(rows)} path={cfg.sheet}")
         if not rows:
             raise RuntimeError(f"No data rows found in sheet: {cfg.sheet}")
 
@@ -443,7 +446,6 @@ def _cli():
                 or row.get("tag")
                 or ""
             )
-            debug_log(cfg.debug, f"row={idx} restaurant={name!r} location={location_tag!r}")
 
             
 
@@ -455,18 +457,35 @@ def _cli():
                 f"{spec_text}\n\n"
                 "Return only the final answer in the format required by the spec."
             )
-            item_result = run_with_retries(agent, task, step_callback=step_callback)
-            parsed = extract_first_json_object(item_result["answer"])
-            debug_log(cfg.debug, f"row={idx} parsed_json={'yes' if parsed is not None else 'no'}")
+            try:
+                item_result = run_with_retries(
+                    agent,
+                    task,
+                    step_callback=step_callback,
+                    validate_result=validate_nonempty_json_answer,
+                )
+                parsed = extract_first_json_object(item_result["answer"])
 
-            all_results.append(
-                {
-                    "restaurant_name": name,
-                    "location_tag": location_tag,
-                    "result": parsed if parsed is not None else item_result["answer"],
-                    "raw_answer": item_result["answer"],
-                }
-            )
+                all_results.append(
+                    {
+                        "restaurant_name": name,
+                        "location_tag": location_tag,
+                        "status": "ok",
+                        "result": parsed if parsed is not None else item_result["answer"],
+                        "raw_answer": item_result["answer"],
+                    }
+                )
+            except Exception as err:
+                all_results.append(
+                    {
+                        "restaurant_name": name,
+                        "location_tag": location_tag,
+                        "status": "failed",
+                        "error": str(err),
+                        "result": None,
+                        "raw_answer": "",
+                    }
+                )
 
 
         result = {
