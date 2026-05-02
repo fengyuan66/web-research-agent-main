@@ -1,0 +1,47 @@
+{
+  "mode": "restaurant_sheet",
+  "sheet": "restaurants.csv",
+  "spec_file": "Examples.md",
+  "count": 5,
+  "results": [
+    {
+      "restaurant_name": "St. Lawrence",
+      "location_tag": "Vancouver Railtown",
+      "result": {
+        "description": "St. Lawrence is a Michelin-starred French-Canadian restaurant in Vancouver, BC. It was opened in June 2017 by Chef J-C Poirier and offers a marriage of classic French cuisine with the food identity and culture of Quebec. The restaurant has received positive reviews for its food, service, and atmosphere.",
+        "image_url": "https://www.stlawrencerestaurant.com/images/gallery/1.jpg",
+        "address": "269 Powell St, Vancouver, BC V6A 1G3",
+        "price_range": "CAN$30 and over",
+        "menu": "[\"Shigoku Oyster Petrossian Imperial Kaluga Caviar\", \"Hen Egg Enriched Chicken Consomm\\u00e9\", \"Sakura Cured Shima-Aji Mille-\", \"Beef\", \"Pork\"]",
+        "genre": "French-Canadian",
+        "website": "https://www.stlawrencerestaurant.com/",
+        "hours": "Tuesday - Sunday 5pm \u2014 10:30 pm"
+      },
+      "raw_answer": "{\"description\": \"St. Lawrence is a Michelin-starred French-Canadian restaurant in Vancouver, BC. It was opened in June 2017 by Chef J-C Poirier and offers a marriage of classic French cuisine with the food identity and culture of Quebec. The restaurant has received positive reviews for its food, service, and atmosphere.\", \"image_url\": \"https://www.stlawrencerestaurant.com/images/gallery/1.jpg\", \"address\": \"269 Powell St, Vancouver, BC V6A 1G3\", \"price_range\": \"CAN$30 and over\", \"menu\": \"[\\\"Shigoku Oyster Petrossian Imperial Kaluga Caviar\\\", \\\"Hen Egg Enriched Chicken Consomm\\\\u00e9\\\", \\\"Sakura Cured Shima-Aji Mille-\\\", \\\"Beef\\\", \\\"Pork\\\"]\", \"genre\": \"French-Canadian\", \"website\": \"https://www.stlawrencerestaurant.com/\", \"hours\": \"Tuesday - Sunday 5pm \u2014 10:30 pm\"}"
+    },
+    {
+      "restaurant_name": "L'Abattoir",
+      "location_tag": "Vancouver Gastown",
+      "result": "Unfortunately, I was unable to find any information on the restaurant.",
+      "raw_answer": "Unfortunately, I was unable to find any information on the restaurant."
+    },
+    {
+      "restaurant_name": "Miku",
+      "location_tag": "Vancouver Waterfront",
+      "result": "",
+      "raw_answer": ""
+    },
+    {
+      "restaurant_name": "Minami",
+      "location_tag": "Vancouver Yaletown",
+      "result": "",
+      "raw_answer": ""
+    },
+    {
+      "restaurant_name": "Kissa Tanto",
+      "location_tag": "Vancouver Chinatown",
+      "result": "",
+      "raw_answer": ""
+    }
+  ]
+}

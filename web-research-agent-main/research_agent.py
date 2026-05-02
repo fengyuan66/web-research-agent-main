@@ -72,7 +72,7 @@ class ResearchAgent:
 
     def __init__(
         self,
-        model: str = "qwen/qwen3-32b",
+        model: str = "meta-llama/llama-3.1-70b-instruct",
         topn: int = 10,
         debug: bool = False,
         hackclub_key: t.Optional[str] = None,
@@ -378,7 +378,7 @@ def _cli():
     p.add_argument("--sheet", type=Path)
     p.add_argument("--spec-file", type=Path, default=Path("Examples.md"))
     
-    p.add_argument("-m", "--model", default="qwen/qwen3-32b")
+    p.add_argument("-m", "--model", default="meta-llama/llama-3.1-70b-instruct")
     p.add_argument("-n", "--topn", type=int, default=10)
     p.add_argument("-o", "--outfile", type=Path)
     p.add_argument("-d", "--debug", action="store_true")
