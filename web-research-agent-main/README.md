@@ -1,3 +1,43 @@
+# RestaurantRAG README
+
+I need a RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
+
+Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent
+
+However, there were two things I need to resolve:
+
+1. This repo used OpenAI (LLM provider) and SerpAPI's (web searching tool provider) APIs. I used Hack Club AI (which is apparently largely compatiable with OpenAI's API) and Serper.dev's API.
+2. This repo was meant to be adapted in a conversation-like style. I needed to fetch data in bulk. Hence, I need a system where I can input restaurants and output a list of results featuring specific fields of each restaurant.
+
+...and so that's exactly what I did.
+
+# How it works
+
+
+
+
+# Comments
+
+In general, THINGS TYPED IN UPPERCASE means to indicate some sort of important variable / customisable element
+
+things typed in lowercase (and sometimes surrounding blocks of code) mainly just point out what's happenning. This is used for maintenance purposes and the divide the code into clear regions
+
+
+# AI usage
+
+pls read AI usage. Overall I can confidently say that the amount of functional code written by the AI is within 30%
+
+
+
+
+
+
+### BELOW IS THE OLD REPO'S README!
+
+-----------------------------------------------------------------------------------
+
+### BELOW IS THE OLD REPO'S README!
+
 # Research Agent
 
 LLM-powered researcher that combines OpenAI chat models with Google results via SerpAPI. The agent asks the model to emit all needed searches at once, runs them concurrently, feeds snippets back, and returns a well‑cited answer. Includes a simple CLI.
