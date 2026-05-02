@@ -12,7 +12,7 @@ Use exactly these keys and no others:
 
 Rules:
 - Include every key exactly as written.
-- If unknown, use null.
+- If unknown, try again.
 - Do not use placeholders like "available", "n/a", or "unknown".
 - For image_url and website: value must be a full URL starting with http:// or https://, otherwise null.
 - description: around 100 words, factual.

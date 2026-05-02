@@ -2,105 +2,99 @@
   "mode": "restaurant_sheet",
   "sheet": "restaurants.csv",
   "spec_file": "Examples.md",
-  "count": 5,
+  "count": 4,
   "results": [
     {
-      "restaurant_name": "St. Lawrence",
-      "location_tag": "Vancouver Railtown",
+      "restaurant_name": "Tojo's Restaurant",
+      "location_tag": "Vancouver Fairview",
       "status": "ok",
       "result": {
-        "description": "Chef J-C Poirier's award-winning, Michelin-starred restaurant in Vancouver. A marriage of classic French cuisine and cocktails with the food identity and culture of Quebec.",
-        "image_url": "https://www.stlawrencerestaurant.com/wp-content/uploads/2022/07/StLawrence-Logo-Final-2022.png",
-        "address": "269 Powell St, Vancouver, BC V6A 1G3",
-        "price_range": "$125 pp",
-        "menu": "[\"Steak St. Lawrence\", \"Tourti\\u00e8re\", \"Escargot\", \"Fries\", \"Venison-filled tourti\\u00e8re\"]",
-        "genre": "French-Canadian",
-        "website": "https://www.stlawrencerestaurant.com/",
-        "hours": "Tuesday - Sunday 5pm - 10:30 pm"
-      },
-      "raw_answer": "{\"description\": \"Chef J-C Poirier's award-winning, Michelin-starred restaurant in Vancouver. A marriage of classic French cuisine and cocktails with the food identity and culture of Quebec.\", \"image_url\": \"https://www.stlawrencerestaurant.com/wp-content/uploads/2022/07/StLawrence-Logo-Final-2022.png\", \"address\": \"269 Powell St, Vancouver, BC V6A 1G3\", \"price_range\": \"$125 pp\", \"menu\": \"[\\\"Steak St. Lawrence\\\", \\\"Tourti\\\\u00e8re\\\", \\\"Escargot\\\", \\\"Fries\\\", \\\"Venison-filled tourti\\\\u00e8re\\\"]\", \"genre\": \"French-Canadian\", \"website\": \"https://www.stlawrencerestaurant.com/\", \"hours\": \"Tuesday - Sunday 5pm - 10:30 pm\"}"
-    },
-    {
-      "restaurant_name": "L'Abattoir",
-      "location_tag": "Vancouver Gastown",
-      "status": "ok",
-      "result": {
-        "description": "L'Abattoir is a restaurant located in Vancouver's historic Gastown, offering elevated French-influenced West Coast cuisine alongside an award-winning wine list. The restaurant was built in the 19th century and is the site of Vancouver's first jail. The name L'Abattoir pays homage to the neighbourhood's colourful past.",
-        "image_url": null,
-        "address": "217 Carrall Street, Vancouver, BC, V6B 2J2, Canada",
-        "price_range": "$65 per person with BC wine pairings an additional +$45",
+        "description": "Tojo's Restaurant is a renowned Japanese fine dining restaurant in Vancouver, Canada. It offers seasonal omakase menus and sushi, crafted with the freshest local and organic ingredients. The restaurant is known for its high-quality food, excellent service, and elegant atmosphere.",
+        "image_url": "https://www.tojos.com/wp-content/uploads/2020/12/Tojos-Logo.jpg",
+        "address": "1133 West Broadway, Vancouver, BC V6H 1G1",
+        "price_range": "$$$",
         "menu": [
-          "Steak tartare",
-          "Baked Pacific oyster",
-          "Hokkaido scallop crudo",
-          "Foie gras torchon",
-          "Pan-fried sweetbreads",
-          "Lightly smoked duck breast"
+          "Omakase",
+          "Sushi",
+          "Sashimi",
+          "Tobiko",
+          "Westcoast Albacore Tuna",
+          "Inari",
+          "Masago",
+          "Tojo's Selection"
         ],
-        "genre": "French-inspired West Coast cuisine",
-        "website": "https://www.labattoir.ca/",
-        "hours": "Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday to Saturday"
+        "genre": "Japanese Fine Dining, Sushi, Seafood",
+        "website": "https://tojos.com/",
+        "hours": "Tuesday - Saturday from 5:00PM with the last seating at 8:00PM"
       },
-      "raw_answer": "{\n  \"description\": \"L'Abattoir is a restaurant located in Vancouver's historic Gastown, offering elevated French-influenced West Coast cuisine alongside an award-winning wine list. The restaurant was built in the 19th century and is the site of Vancouver's first jail. The name L'Abattoir pays homage to the neighbourhood's colourful past.\",\n  \"image_url\": null,\n  \"address\": \"217 Carrall Street, Vancouver, BC, V6B 2J2, Canada\",\n  \"price_range\": \"$65 per person with BC wine pairings an additional +$45\",\n  \"menu\": [\n    \"Steak tartare\",\n    \"Baked Pacific oyster\",\n    \"Hokkaido scallop crudo\",\n    \"Foie gras torchon\",\n    \"Pan-fried sweetbreads\",\n    \"Lightly smoked duck breast\"\n  ],\n  \"genre\": \"French-inspired West Coast cuisine\",\n  \"website\": \"https://www.labattoir.ca/\",\n  \"hours\": \"Dinner: 5:00pm Tuesday - Saturday. Happy Hour: 5:00pm - 6:00pm Tuesday to Saturday\"\n}"
+      "raw_answer": "{\n  \"description\": \"Tojo's Restaurant is a renowned Japanese fine dining restaurant in Vancouver, Canada. It offers seasonal omakase menus and sushi, crafted with the freshest local and organic ingredients. The restaurant is known for its high-quality food, excellent service, and elegant atmosphere.\",\n  \"image_url\": \"https://www.tojos.com/wp-content/uploads/2020/12/Tojos-Logo.jpg\",\n  \"address\": \"1133 West Broadway, Vancouver, BC V6H 1G1\",\n  \"price_range\": \"$$$\",\n  \"menu\": [\n    \"Omakase\",\n    \"Sushi\",\n    \"Sashimi\",\n    \"Tobiko\",\n    \"Westcoast Albacore Tuna\",\n    \"Inari\",\n    \"Masago\",\n    \"Tojo's Selection\"\n  ],\n  \"genre\": \"Japanese Fine Dining, Sushi, Seafood\",\n  \"website\": \"https://tojos.com/\",\n  \"hours\": \"Tuesday - Saturday from 5:00PM with the last seating at 8:00PM\"\n}"
     },
     {
-      "restaurant_name": "Miku",
-      "location_tag": "Vancouver Waterfront",
-      "status": "ok",
-      "result": {
-        "description": "Miku Vancouver, a Michelin Guide Recommended restaurant, specializes in Aburi, or flamed-seared, sushi, which was developed nearly a century ago in Japan. Our new location offers a full bar and lounge area, waterfront patio, private dining room and full-service sushi bar. Executive Chef Kazuhiro Hayashi takes great care in combining traditional Japanese flavours and techniques with local, west coast elements to create a truly unique dining experience enjoyed by locals and visitors alike.",
-        "image_url": "https://mikurestaurant.com/wp-content/uploads/2019/06/Miku-Vancouver-101.jpg",
-        "address": "70-200 Granville St, Vancouver, BC V6C 1S4",
-        "price_range": "$$$$",
-        "menu": [
-          "Aburi Salmon Oshi",
-          "Aburi Ebi Oshi",
-          "Aburi Tuna Oshi",
-          "Miku Platter",
-          "Lobster Ceviche",
-          "Soft-Shell Crab",
-          "Ebi Fritters"
-        ],
-        "genre": "Japanese",
-        "website": "https://mikurestaurant.com/",
-        "hours": "Mon - Thu: 11:30 am - 10:00 pm, Fri - Sat: 11:30 am - 11:00 pm, Sun: 11:30 am - 10:00 pm"
-      },
-      "raw_answer": "{\"description\": \"Miku Vancouver, a Michelin Guide Recommended restaurant, specializes in Aburi, or flamed-seared, sushi, which was developed nearly a century ago in Japan. Our new location offers a full bar and lounge area, waterfront patio, private dining room and full-service sushi bar. Executive Chef Kazuhiro Hayashi takes great care in combining traditional Japanese flavours and techniques with local, west coast elements to create a truly unique dining experience enjoyed by locals and visitors alike.\", \"image_url\": \"https://mikurestaurant.com/wp-content/uploads/2019/06/Miku-Vancouver-101.jpg\", \"address\": \"70-200 Granville St, Vancouver, BC V6C 1S4\", \"price_range\": \"$$$$\", \"menu\": [\"Aburi Salmon Oshi\", \"Aburi Ebi Oshi\", \"Aburi Tuna Oshi\", \"Miku Platter\", \"Lobster Ceviche\", \"Soft-Shell Crab\", \"Ebi Fritters\"], \"genre\": \"Japanese\", \"website\": \"https://mikurestaurant.com/\", \"hours\": \"Mon - Thu: 11:30 am - 10:00 pm, Fri - Sat: 11:30 am - 11:00 pm, Sun: 11:30 am - 10:00 pm\"}"
-    },
-    {
-      "restaurant_name": "Minami",
+      "restaurant_name": "Blue Water Cafe",
       "location_tag": "Vancouver Yaletown",
       "status": "ok",
       "result": {
-        "description": "Minami is a contemporary Japanese restaurant that lies in the vibrant Yaletown community. Symbolically meaning 'Beautiful Wave' in Japanese, Minami offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere.",
-        "image_url": null,
-        "address": "1118 Mainland St, Vancouver, BC V6B 2T9",
-        "price_range": "$50-70 CAD",
+        "description": "Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, it is an approachable fine-dining seafood restaurant with innovative and West Coast inspired dishes.",
+        "image_url": "https://bluewatercafe.ca/wp-content/uploads/2022/08/Blue-Water-Cafe-Logo-2022.png",
+        "address": "1095 Hamilton St, Vancouver, BC V6B 5T4, Canada",
+        "price_range": "$20-30 CAD",
         "menu": [
-          "Aburi Sushi",
-          "Ebi Oshi",
-          "Premium Nigiri Sushi Tier",
-          "Assorted Sashimi Platter",
-          "Sumire Platter",
-          "Green Tea Opera Dessert Tier",
-          "Bincho Nigiri",
-          "Sockeye Nigiri",
-          "Maguro Nigiri",
-          "Hamachi Nigiri"
+          "Sushi",
+          "Seafood",
+          "Cocktails",
+          "Wine"
         ],
-        "genre": "Japanese",
-        "website": "https://www.minamirestaurant.com/",
-        "hours": "Monday to Sunday 5:00 pm to 9:30 pm"
+        "genre": "Seafood",
+        "website": "https://bluewatercafe.ca/",
+        "hours": "Monday to Thursday: 5:00 PM - 10:00 PM, Friday to Saturday: 5:00 PM - 11:00 PM, Sunday: 5:00 PM - 10:00 PM"
       },
-      "raw_answer": "{\n  \"description\": \"Minami is a contemporary Japanese restaurant that lies in the vibrant Yaletown community. Symbolically meaning 'Beautiful Wave' in Japanese, Minami offers a combination of Japanese and West Coast cuisine in a comfortable, rustic atmosphere.\",\n  \"image_url\": null,\n  \"address\": \"1118 Mainland St, Vancouver, BC V6B 2T9\",\n  \"price_range\": \"$50-70 CAD\",\n  \"menu\": [\n    \"Aburi Sushi\",\n    \"Ebi Oshi\",\n    \"Premium Nigiri Sushi Tier\",\n    \"Assorted Sashimi Platter\",\n    \"Sumire Platter\",\n    \"Green Tea Opera Dessert Tier\",\n    \"Bincho Nigiri\",\n    \"Sockeye Nigiri\",\n    \"Maguro Nigiri\",\n    \"Hamachi Nigiri\"\n  ],\n  \"genre\": \"Japanese\",\n  \"website\": \"https://www.minamirestaurant.com/\",\n  \"hours\": \"Monday to Sunday 5:00 pm to 9:30 pm\"\n}"
+      "raw_answer": "{\"description\": \"Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, it is an approachable fine-dining seafood restaurant with innovative and West Coast inspired dishes.\", \"image_url\": \"https://bluewatercafe.ca/wp-content/uploads/2022/08/Blue-Water-Cafe-Logo-2022.png\", \"address\": \"1095 Hamilton St, Vancouver, BC V6B 5T4, Canada\", \"price_range\": \"$20-30 CAD\", \"menu\": [\"Sushi\", \"Seafood\", \"Cocktails\", \"Wine\"], \"genre\": \"Seafood\", \"website\": \"https://bluewatercafe.ca/\", \"hours\": \"Monday to Thursday: 5:00 PM - 10:00 PM, Friday to Saturday: 5:00 PM - 11:00 PM, Sunday: 5:00 PM - 10:00 PM\"}"
     },
     {
-      "restaurant_name": "Kissa Tanto",
+      "restaurant_name": "Chambar",
+      "location_tag": "Vancouver Crosstown",
+      "status": "ok",
+      "result": {
+        "description": "Chambar is Vancouver\u2019s top destination for modern casual dining. We offer fresh, local ingredients, Belgian-inspired cuisine, and a chic yet inviting atmosphere. Our restaurant is located at 568 Beatty Street in Vancouver\u2019s Crosstown neighbourhood, within walking distance of BC Place and convenient to the downtown core.",
+        "image_url": "https://www.chambar.com/gallery/",
+        "address": "568 Beatty Street, Vancouver, BC V6B 2L3",
+        "price_range": "$$",
+        "menu": [
+          "Maple Glazed Bacon & Apples",
+          "Foccacia",
+          "Chicken-Bacon-Manchego Sausage",
+          "Baby gem lettuce, mustard tarragon vinagrette, cave aged gruy\u00e8re",
+          "Fried Spiced Potatoes"
+        ],
+        "genre": "Belgian, North African, European",
+        "website": "https://www.chambar.com/",
+        "hours": "Monday - Friday Dinner: 4:30pm - 10:30pm, Saturday & Sunday Brunch: 9am - 3pm"
+      },
+      "raw_answer": "{\n  \"description\": \"Chambar is Vancouver\\u2019s top destination for modern casual dining. We offer fresh, local ingredients, Belgian-inspired cuisine, and a chic yet inviting atmosphere. Our restaurant is located at 568 Beatty Street in Vancouver\\u2019s Crosstown neighbourhood, within walking distance of BC Place and convenient to the downtown core.\",\n  \"image_url\": \"https://www.chambar.com/gallery/\",\n  \"address\": \"568 Beatty Street, Vancouver, BC V6B 2L3\",\n  \"price_range\": \"$$\",\n  \"menu\": [\"Maple Glazed Bacon & Apples\", \"Foccacia\", \"Chicken-Bacon-Manchego Sausage\", \"Baby gem lettuce, mustard tarragon vinagrette, cave aged gruy\\u00e8re\", \"Fried Spiced Potatoes\"],\n  \"genre\": \"Belgian, North African, European\",\n  \"website\": \"https://www.chambar.com/\",\n  \"hours\": \"Monday - Friday Dinner: 4:30pm - 10:30pm, Saturday & Sunday Brunch: 9am - 3pm\"\n}"
+    },
+    {
+      "restaurant_name": "Phnom Penh",
       "location_tag": "Vancouver Chinatown",
-      "status": "failed",
-      "error": "Restaurant processing failed after 3 attempts: Empty model output.",
-      "result": null,
-      "raw_answer": ""
+      "status": "ok",
+      "result": {
+        "description": "Phnom Penh Restaurant has been a cornerstone of Vancouver's Chinatown for over 36 years, offering authentic Cambodian and Vietnamese cuisine. The kitchen showcases traditional recipes crafted with fresh ingredients, emphasizing the rich culinary heritage of Southeast Asia.",
+        "image_url": null,
+        "address": "244 East Georgia Street",
+        "price_range": "$20-30 CAD",
+        "menu": [
+          "Phnom Penh Rice Noodles",
+          "Phnom Penh Dry Rice Noodles",
+          "Phnom Penh Egg Noodles",
+          "Phnom Penh Dry Egg Noodles",
+          "Beef Luc Lac on Rice",
+          "Marinated Butter Beef",
+          "Beef Luc Lac with Egg on Rice"
+        ],
+        "genre": "Cambodian-Vietnamese",
+        "website": "https://www.phnompenhrestaurant.ca/",
+        "hours": "Mon-Thurs: 10am-9pm, Fri-Sun: 10am-10pm"
+      },
+      "raw_answer": "{\n  \"description\": \"Phnom Penh Restaurant has been a cornerstone of Vancouver's Chinatown for over 36 years, offering authentic Cambodian and Vietnamese cuisine. The kitchen showcases traditional recipes crafted with fresh ingredients, emphasizing the rich culinary heritage of Southeast Asia.\",\n  \"image_url\": null,\n  \"address\": \"244 East Georgia Street\",\n  \"price_range\": \"$20-30 CAD\",\n  \"menu\": [\n    \"Phnom Penh Rice Noodles\",\n    \"Phnom Penh Dry Rice Noodles\",\n    \"Phnom Penh Egg Noodles\",\n    \"Phnom Penh Dry Egg Noodles\",\n    \"Beef Luc Lac on Rice\",\n    \"Marinated Butter Beef\",\n    \"Beef Luc Lac with Egg on Rice\"\n  ],\n  \"genre\": \"Cambodian-Vietnamese\",\n  \"website\": \"https://www.phnompenhrestaurant.ca/\",\n  \"hours\": \"Mon-Thurs: 10am-9pm, Fri-Sun: 10am-10pm\"\n}"
     }
   ]
 }
