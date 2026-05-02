@@ -56,7 +56,7 @@ Validate empty or corrupted outputs
   + Command line interface
     + Parse arguments given in command line
     + Helper function to build the task prompt for one specific restaurant
-    + Helper function for parsing one row from spreadsheet to extract restaurant name and rough location
+    + Helper function for parsing rows from spreadsheet to extract restaurant name and rough location
     Batch mode (with sheet) vs query mode (singular search)
     Print and save result
 
@@ -85,9 +85,19 @@ In general, THINGS TYPED IN UPPERCASE means to indicate some sort of important v
 things typed in lowercase (and sometimes surrounding blocks of code) mainly just point out what's happenning. This is used for maintenance purposes and the divide the code into clear regions
 
 
-# AI usage
+# AI declaration
 
-pls read AI usage. Overall I can confidently say that the amount of functional code written by the AI is within 30% and used at least in a purposeful and reasonable manner
+AI is used mainly for four things in my project:
+1. Debugging (adding debugging statements that helped me find where the error was several times during the making, pointing out high-level issues that caused instability in the initial iteration the RAG system)
+2. Prompt development (ChatGPT wrote prompts for the LLM because its very good at prompt engineering)
+3. Difficult parsing (e.g., sorting info extracted from search into buckets based on their origins for better digestion). Some of these I found to be very tedious relative to its contribution to the program's function, mainly because although there are tutorials online, adapting the parsing to my own use case is a case in itself.
+4. I used ChatGPT to help me summarise implementation documentation for particular APIs, namely the Serper.dev (web browsing tool) API.
+
+AI was not used to write this very README!!!
+
+Overall I can confidently say that the amount of my code written by the AI is <30% and used in a purposeful and reasonable manner
+
+# One more thing...
 
 
 
