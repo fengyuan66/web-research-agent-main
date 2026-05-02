@@ -6,95 +6,96 @@
   "results": [
     {
       "restaurant_name": "Tojo's Restaurant",
-      "location_tag": "Vancouver Fairview",
-      "status": "ok",
+      "location": "Vancouver Fairview",
+      "status": "good",
       "result": {
-        "description": "Tojo's Restaurant is a renowned Japanese fine dining restaurant in Vancouver, Canada. It offers seasonal omakase menus and sushi, crafted with the freshest local and organic ingredients. The restaurant is known for its high-quality food, excellent service, and elegant atmosphere.",
-        "image_url": "https://www.tojos.com/wp-content/uploads/2020/12/Tojos-Logo.jpg",
+        "description": "Experience world-renowned Japanese fine dining at Tojo's in Vancouver. Chef Hidekazu Tojo, creator of the California Roll, offers seasonal omakase menus and exquisite food served as an art form. The restaurant has a lovely ambiance inside, with nice little enclosed booths and a casually elegant space in Fairview.",
+        "image_url": "https://www.instagram.com/p/CSx6dy8hIV4/",
         "address": "1133 West Broadway, Vancouver, BC V6H 1G1",
-        "price_range": "$$$",
+        "price_range": "$330-$500 CAD",
         "menu": [
-          "Omakase",
-          "Sushi",
-          "Sashimi",
-          "Tobiko",
-          "Westcoast Albacore Tuna",
+          "Tojo's Selection",
           "Inari",
           "Masago",
-          "Tojo's Selection"
+          "Westcoast Albacore Tuna",
+          "Tobiko",
+          "Tojo's Chicken",
+          "Canadian Sablefish",
+          "Tojo's Tenderloin",
+          "Wagyu"
         ],
-        "genre": "Japanese Fine Dining, Sushi, Seafood",
+        "genre": "Japanese, Seafood, Sushi, Fusion, Healthy",
         "website": "https://tojos.com/",
-        "hours": "Tuesday - Saturday from 5:00PM with the last seating at 8:00PM"
+        "hours": "Tuesday - Saturday from 5:00PM with the last seating at 8:00PM. Takeaway: Order Online by 4PM for curbside pickup. Please allow at least 1 hour for preparation."
       },
-      "raw_answer": "{\n  \"description\": \"Tojo's Restaurant is a renowned Japanese fine dining restaurant in Vancouver, Canada. It offers seasonal omakase menus and sushi, crafted with the freshest local and organic ingredients. The restaurant is known for its high-quality food, excellent service, and elegant atmosphere.\",\n  \"image_url\": \"https://www.tojos.com/wp-content/uploads/2020/12/Tojos-Logo.jpg\",\n  \"address\": \"1133 West Broadway, Vancouver, BC V6H 1G1\",\n  \"price_range\": \"$$$\",\n  \"menu\": [\n    \"Omakase\",\n    \"Sushi\",\n    \"Sashimi\",\n    \"Tobiko\",\n    \"Westcoast Albacore Tuna\",\n    \"Inari\",\n    \"Masago\",\n    \"Tojo's Selection\"\n  ],\n  \"genre\": \"Japanese Fine Dining, Sushi, Seafood\",\n  \"website\": \"https://tojos.com/\",\n  \"hours\": \"Tuesday - Saturday from 5:00PM with the last seating at 8:00PM\"\n}"
+      "raw_answer": "{\n  \"description\": \"Experience world-renowned Japanese fine dining at Tojo's in Vancouver. Chef Hidekazu Tojo, creator of the California Roll, offers seasonal omakase menus and exquisite food served as an art form. The restaurant has a lovely ambiance inside, with nice little enclosed booths and a casually elegant space in Fairview.\",\n  \"image_url\": \"https://www.instagram.com/p/CSx6dy8hIV4/\",\n  \"address\": \"1133 West Broadway, Vancouver, BC V6H 1G1\",\n  \"price_range\": \"$330-$500 CAD\",\n  \"menu\": [\n    \"Tojo's Selection\",\n    \"Inari\",\n    \"Masago\",\n    \"Westcoast Albacore Tuna\",\n    \"Tobiko\",\n    \"Tojo's Chicken\",\n    \"Canadian Sablefish\",\n    \"Tojo's Tenderloin\",\n    \"Wagyu\"\n  ],\n  \"genre\": \"Japanese, Seafood, Sushi, Fusion, Healthy\",\n  \"website\": \"https://tojos.com/\",\n  \"hours\": \"Tuesday - Saturday from 5:00PM with the last seating at 8:00PM. Takeaway: Order Online by 4PM for curbside pickup. Please allow at least 1 hour for preparation.\"\n}"
     },
     {
       "restaurant_name": "Blue Water Cafe",
-      "location_tag": "Vancouver Yaletown",
-      "status": "ok",
+      "location": "Vancouver Yaletown",
+      "status": "good",
       "result": {
-        "description": "Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, it is an approachable fine-dining seafood restaurant with innovative and West Coast inspired dishes.",
-        "image_url": "https://bluewatercafe.ca/wp-content/uploads/2022/08/Blue-Water-Cafe-Logo-2022.png",
-        "address": "1095 Hamilton St, Vancouver, BC V6B 5T4, Canada",
-        "price_range": "$20-30 CAD",
+        "description": "Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, the restaurant offers an approachable fine-dining experience with a focus on sustainable seafood and West Coast inspired dishes. The menu features premium chilled seafood, sushi, and signature seafood entrees.",
+        "image_url": null,
+        "address": "1095 Hamilton Street, Vancouver, BC V6B 5T4",
+        "price_range": "$$$",
         "menu": [
-          "Sushi",
-          "Seafood",
-          "Cocktails",
-          "Wine"
+          "Chilled seafood",
+          "Cocktail Prawns on Ice",
+          "Oysters on the half shell",
+          "Scallop ceviche",
+          "Tuna tartar",
+          "Fresh crab meat roll",
+          "Spicy tuna roll"
         ],
-        "genre": "Seafood",
+        "genre": "Seafood, Sushi",
         "website": "https://bluewatercafe.ca/",
-        "hours": "Monday to Thursday: 5:00 PM - 10:00 PM, Friday to Saturday: 5:00 PM - 11:00 PM, Sunday: 5:00 PM - 10:00 PM"
+        "hours": "Bar Daily from 4:30 PM, Dinner Daily from 5 PM"
       },
-      "raw_answer": "{\"description\": \"Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, it is an approachable fine-dining seafood restaurant with innovative and West Coast inspired dishes.\", \"image_url\": \"https://bluewatercafe.ca/wp-content/uploads/2022/08/Blue-Water-Cafe-Logo-2022.png\", \"address\": \"1095 Hamilton St, Vancouver, BC V6B 5T4, Canada\", \"price_range\": \"$20-30 CAD\", \"menu\": [\"Sushi\", \"Seafood\", \"Cocktails\", \"Wine\"], \"genre\": \"Seafood\", \"website\": \"https://bluewatercafe.ca/\", \"hours\": \"Monday to Thursday: 5:00 PM - 10:00 PM, Friday to Saturday: 5:00 PM - 11:00 PM, Sunday: 5:00 PM - 10:00 PM\"}"
+      "raw_answer": "{\n  \"description\": \"Blue Water Cafe is Vancouver's top destination for seafood, cocktails, wine and unparalleled service. Located in Yaletown, the restaurant offers an approachable fine-dining experience with a focus on sustainable seafood and West Coast inspired dishes. The menu features premium chilled seafood, sushi, and signature seafood entrees.\",\n  \"image_url\": null,\n  \"address\": \"1095 Hamilton Street, Vancouver, BC V6B 5T4\",\n  \"price_range\": \"$$$\",\n  \"menu\": [\n    \"Chilled seafood\",\n    \"Cocktail Prawns on Ice\",\n    \"Oysters on the half shell\",\n    \"Scallop ceviche\",\n    \"Tuna tartar\",\n    \"Fresh crab meat roll\",\n    \"Spicy tuna roll\"\n  ],\n  \"genre\": \"Seafood, Sushi\",\n  \"website\": \"https://bluewatercafe.ca/\",\n  \"hours\": \"Bar Daily from 4:30 PM, Dinner Daily from 5 PM\"\n}"
     },
     {
       "restaurant_name": "Chambar",
-      "location_tag": "Vancouver Crosstown",
-      "status": "ok",
+      "location": "Vancouver Crosstown",
+      "status": "good",
       "result": {
-        "description": "Chambar is Vancouver\u2019s top destination for modern casual dining. We offer fresh, local ingredients, Belgian-inspired cuisine, and a chic yet inviting atmosphere. Our restaurant is located at 568 Beatty Street in Vancouver\u2019s Crosstown neighbourhood, within walking distance of BC Place and convenient to the downtown core.",
-        "image_url": "https://www.chambar.com/gallery/",
-        "address": "568 Beatty Street, Vancouver, BC V6B 2L3",
-        "price_range": "$$",
+        "description": "Chambar is a Belgian-inspired restaurant in Vancouver\u2019s Crosstown neighborhood, known for its Moules Frites and extensive selection of Belgian beers.",
+        "image_url": null,
+        "address": "568 Beatty St, Vancouver, BC V6B 2L3, Canada",
+        "price_range": "$20-40 CAD",
         "menu": [
-          "Maple Glazed Bacon & Apples",
-          "Foccacia",
-          "Chicken-Bacon-Manchego Sausage",
-          "Baby gem lettuce, mustard tarragon vinagrette, cave aged gruy\u00e8re",
-          "Fried Spiced Potatoes"
+          "Moules Frites",
+          "Waterzooi",
+          "Carbonade Flamande",
+          "Bouillabaisse",
+          "Belgian Waffles"
         ],
-        "genre": "Belgian, North African, European",
+        "genre": "Belgian",
         "website": "https://www.chambar.com/",
-        "hours": "Monday - Friday Dinner: 4:30pm - 10:30pm, Saturday & Sunday Brunch: 9am - 3pm"
+        "hours": "Monday to Thursday 11:30am to 10:00pm, Friday to Saturday 11:30am to 11:00pm, Sunday 10:00am to 10:00pm"
       },
-      "raw_answer": "{\n  \"description\": \"Chambar is Vancouver\\u2019s top destination for modern casual dining. We offer fresh, local ingredients, Belgian-inspired cuisine, and a chic yet inviting atmosphere. Our restaurant is located at 568 Beatty Street in Vancouver\\u2019s Crosstown neighbourhood, within walking distance of BC Place and convenient to the downtown core.\",\n  \"image_url\": \"https://www.chambar.com/gallery/\",\n  \"address\": \"568 Beatty Street, Vancouver, BC V6B 2L3\",\n  \"price_range\": \"$$\",\n  \"menu\": [\"Maple Glazed Bacon & Apples\", \"Foccacia\", \"Chicken-Bacon-Manchego Sausage\", \"Baby gem lettuce, mustard tarragon vinagrette, cave aged gruy\\u00e8re\", \"Fried Spiced Potatoes\"],\n  \"genre\": \"Belgian, North African, European\",\n  \"website\": \"https://www.chambar.com/\",\n  \"hours\": \"Monday - Friday Dinner: 4:30pm - 10:30pm, Saturday & Sunday Brunch: 9am - 3pm\"\n}"
+      "raw_answer": "{\n  \"description\": \"Chambar is a Belgian-inspired restaurant in Vancouver\\u2019s Crosstown neighborhood, known for its Moules Frites and extensive selection of Belgian beers.\",\n  \"image_url\": null,\n  \"address\": \"568 Beatty St, Vancouver, BC V6B 2L3, Canada\",\n  \"price_range\": \"$20-40 CAD\",\n  \"menu\": [\n    \"Moules Frites\",\n    \"Waterzooi\",\n    \"Carbonade Flamande\",\n    \"Bouillabaisse\",\n    \"Belgian Waffles\"\n  ],\n  \"genre\": \"Belgian\",\n  \"website\": \"https://www.chambar.com/\",\n  \"hours\": \"Monday to Thursday 11:30am to 10:00pm, Friday to Saturday 11:30am to 11:00pm, Sunday 10:00am to 10:00pm\"\n}"
     },
     {
       "restaurant_name": "Phnom Penh",
-      "location_tag": "Vancouver Chinatown",
-      "status": "ok",
+      "location": "Vancouver Chinatown",
+      "status": "good",
       "result": {
-        "description": "Phnom Penh Restaurant has been a cornerstone of Vancouver's Chinatown for over 36 years, offering authentic Cambodian and Vietnamese cuisine. The kitchen showcases traditional recipes crafted with fresh ingredients, emphasizing the rich culinary heritage of Southeast Asia.",
+        "description": "Phnom Penh Restaurant is a family-run institution that has been serving authentic Cambodian and Vietnamese cuisine in Vancouver's Chinatown for over 36 years. They offer a wide variety of dishes, including their famous butter beef, chicken wings, and noodle soups. The restaurant has received numerous awards and accolades, including a Michelin Bib Gourmand designation and a reputation as one of the best Asian restaurants in Vancouver.",
         "image_url": null,
-        "address": "244 East Georgia Street",
+        "address": "244 East Georgia Street, Vancouver, BC V6A 1Z7",
         "price_range": "$20-30 CAD",
         "menu": [
-          "Phnom Penh Rice Noodles",
-          "Phnom Penh Dry Rice Noodles",
-          "Phnom Penh Egg Noodles",
-          "Phnom Penh Dry Egg Noodles",
-          "Beef Luc Lac on Rice",
-          "Marinated Butter Beef",
-          "Beef Luc Lac with Egg on Rice"
+          "Butter Beef",
+          "Chicken Wings",
+          "Noodle Soups",
+          "Vietnamese and Cambodian dishes"
         ],
         "genre": "Cambodian-Vietnamese",
-        "website": "https://www.phnompenhrestaurant.ca/",
+        "website": "http://www.phnompenhrestaurant.ca/",
         "hours": "Mon-Thurs: 10am-9pm, Fri-Sun: 10am-10pm"
       },
-      "raw_answer": "{\n  \"description\": \"Phnom Penh Restaurant has been a cornerstone of Vancouver's Chinatown for over 36 years, offering authentic Cambodian and Vietnamese cuisine. The kitchen showcases traditional recipes crafted with fresh ingredients, emphasizing the rich culinary heritage of Southeast Asia.\",\n  \"image_url\": null,\n  \"address\": \"244 East Georgia Street\",\n  \"price_range\": \"$20-30 CAD\",\n  \"menu\": [\n    \"Phnom Penh Rice Noodles\",\n    \"Phnom Penh Dry Rice Noodles\",\n    \"Phnom Penh Egg Noodles\",\n    \"Phnom Penh Dry Egg Noodles\",\n    \"Beef Luc Lac on Rice\",\n    \"Marinated Butter Beef\",\n    \"Beef Luc Lac with Egg on Rice\"\n  ],\n  \"genre\": \"Cambodian-Vietnamese\",\n  \"website\": \"https://www.phnompenhrestaurant.ca/\",\n  \"hours\": \"Mon-Thurs: 10am-9pm, Fri-Sun: 10am-10pm\"\n}"
+      "raw_answer": "{\"description\": \"Phnom Penh Restaurant is a family-run institution that has been serving authentic Cambodian and Vietnamese cuisine in Vancouver's Chinatown for over 36 years. They offer a wide variety of dishes, including their famous butter beef, chicken wings, and noodle soups. The restaurant has received numerous awards and accolades, including a Michelin Bib Gourmand designation and a reputation as one of the best Asian restaurants in Vancouver.\", \"image_url\": null, \"address\": \"244 East Georgia Street, Vancouver, BC V6A 1Z7\", \"price_range\": \"$20-30 CAD\", \"menu\": [\"Butter Beef\", \"Chicken Wings\", \"Noodle Soups\", \"Vietnamese and Cambodian dishes\"], \"genre\": \"Cambodian-Vietnamese\", \"website\": \"http://www.phnompenhrestaurant.ca/\", \"hours\": \"Mon-Thurs: 10am-9pm, Fri-Sun: 10am-10pm\"}"
     }
   ]
 }

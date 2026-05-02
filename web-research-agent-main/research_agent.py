@@ -11,10 +11,16 @@ from concurrent.futures import ThreadPoolExecutor
 from openai import OpenAI
 
 
-#stripping Qwen3's thinking blocks from results
+#(Old!) stripping Qwen3's thinking blocks from results
 _THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL)
 def strip_thinking(text: str) -> str:
     return _THINK_RE.sub("", text).strip()
+
+
+
+
+
+
 
 
 # restaurant parsing functions
@@ -57,54 +63,83 @@ def extract_first_json_object(text: str) -> t.Optional[dict[str, t.Any]]:
         except json.JSONDecodeError:
             pass
     return None
-# restaurant
+# restaurant parsing functions
+
+
+
+
+
+
+
+
 
 
 def run_with_retries(
     agent: "ResearchAgent",
     task: str,
     step_callback: t.Optional[t.Callable[[dict], None]] = None,
-    max_attempts: int = 3,
+
+    
+    max_attempts: int = 3, # MAX ATTEMPTS VARIABLE HERE
+
+
     base_backoff_seconds: float = 1.0,
     validate_result: t.Optional[t.Callable[[dict[str, t.Any]], None]] = None,
 ) -> dict[str, t.Any]:
+    
+    
+
     last_err: t.Optional[Exception] = None
-    task_for_attempt = task
+    current_task = task
     for attempt in range(1, max_attempts + 1):
         try:
-            result = agent.run(task_for_attempt, step_callback=step_callback)
+            result = agent.run(current_task, step_callback=step_callback)
             if validate_result:
                 validate_result(result)
             return result
         except Exception as err:
             last_err = err
-            # If the model returns empty/invalid output, tighten the instruction for next attempt.
+            # If the model returns empty/invalid output, tighten the instruction for next attempt
             if "Empty model output" in str(err) or "not a valid JSON object" in str(err):
-                task_for_attempt = (
+                current_task = (
                     task
                     + "\n\nIMPORTANT: Return exactly one valid JSON object now. "
                     + "No prose, no markdown, no code fences."
                 )
+
             if attempt >= max_attempts:
                 break
-            sleep_s = base_backoff_seconds * (2 ** (attempt - 1))
+
+            #backoff times will increase exponentially with every retry
+            sleeptimer = base_backoff_seconds * (2 ** (attempt - 1))
+
+
+            # debugging
             if agent.debug:
-                print(f"[DEBUG] row attempt {attempt}/{max_attempts} failed: {err}; retrying in {sleep_s:.1f}s")
-            time.sleep(sleep_s)
+                print(f"[DEBUG] row attempt {attempt}/{max_attempts} failed: {err}; retrying in {sleeptimer:.1f}s")
+            time.sleep(sleeptimer)
     raise RuntimeError(f"Restaurant processing failed after {max_attempts} attempts: {last_err}")
 
 
 def validate_nonempty_json_answer(result: dict[str, t.Any]) -> None:
-    answer = str(result.get("answer") or "").strip()
-    if not answer:
-        raise ValueError("Empty model output.")
-    if extract_first_json_object(answer) is None:
-        raise ValueError("Model output is not a valid JSON object.")
+    answertxt = str(result.get("answer") or "").strip()
+    if not answertxt:
+        raise ValueError("Empty model output")
+    if extract_first_json_object(answertxt) is None:
+        raise ValueError("Model output is not valid JSON")
+
+
+
+
+
+
+# Important bit starts here...
+
 
 
 
 class ResearchAgent:
-    """LLM‑powered researcher that combines OpenAI o‑series model with SerpAPI."""
+
 
     HACKCLUB_URL = "https://ai.hackclub.com/proxy/v1"
 
@@ -116,6 +151,7 @@ class ResearchAgent:
         hackclub_key: t.Optional[str] = None,
         serperdev_key: t.Optional[str] = None,
     ) -> None:
+        
         self.model = model
         self.topn = topn
         self.debug = debug
@@ -156,7 +192,7 @@ class ResearchAgent:
         ]
         
 
-#----------------------------------------
+#---------------------------------------- SYSTEM PROMPT HERE
 
         self._sys_prompt = (
             "You are a meticulous research assistant with access to real-time web search.\n\n"
@@ -174,7 +210,7 @@ class ResearchAgent:
         )
         self.sys_prompt = self._sys_prompt
 
-#----------------------------------------
+#------------------------------------------
 
 
     def search_web(self, query: str) -> str:
@@ -190,7 +226,7 @@ class ResearchAgent:
 
                 json={"q": query, "num": self.topn},
 
-                #TIMEOUT VARIABLE HERE
+                #WEB SEARCHING API TIMEOUT VARIABLE HERE
 
                 timeout = 7, 
             )
@@ -202,6 +238,9 @@ class ResearchAgent:
             return f"Search error: {err}"
         
         lines: list[str] = []
+
+
+
 
 
 
@@ -284,6 +323,9 @@ class ResearchAgent:
 
     
 
+
+
+
     def run(self, question: str, step_callback: t.Optional[t.Callable[[dict], None]] = None,) -> dict[str, t.Any]:
 
 
@@ -301,6 +343,8 @@ class ResearchAgent:
             step_history.append(step)
             if step_callback:
                 step_callback(step)
+
+
 
         while True:
             if self.debug:
@@ -361,14 +405,15 @@ class ResearchAgent:
 
 
 
-                # CUSTOMISE PARAMETER FOR CONCURRENT SEARCHES
-                with ThreadPoolExecutor(max_workers=min(len(msg.tool_calls), 5)) as pool:
+                # CUSTOMISE PARAMETER FOR # OF CONCURRENT SEARCHES
+                MAX_CONCURRENT_SEARCHES = 5
+                with ThreadPoolExecutor(max_workers=min(len(msg.tool_calls), MAX_CONCURRENT_SEARCHES)) as pool:
                     results = list(pool.map(fetch, msg.tool_calls))
 
 
 
 
-                # append each tool result in the SAME ORDER as tool_calls
+                #if there's still more tool calls, append them back
                 for call_id, result in results:
                     steps.append({"type": "tool_result", "content": result})
                     messages.append(
@@ -380,8 +425,8 @@ class ResearchAgent:
                     )
                 continue
             
-            # no tool calls → final answer
-            
+           
+            #if final answer is reached, no more tool calling
             raw = msg.content or ""
             answer = strip_thinking(raw)
 
@@ -421,23 +466,39 @@ def _cli():
 
     agent = ResearchAgent(model=cfg.model, topn=cfg.topn, debug=cfg.debug)
 
-    # restaurant addition
-    if cfg.sheet:
-        spec_text = load_spec_text(cfg.spec_file)
-        rows = load_restaurant_sheet(cfg.sheet)
-        if not rows:
-            raise RuntimeError(f"No data rows found in sheet: {cfg.sheet}")
 
-        all_results: list[dict[str, t.Any]] = []
-        for idx, row in enumerate(rows, start=1):
-            name = (
+
+    #TASK PROMPT CONSTRUCTION
+    def build_research_task(name: str, location: str, spec: str)-> str:
+        
+        return ("Research this restaurant.\n"
+        f"Restaurant name: {name}\n"
+        f"Approximate location tag: {location}\n"
+        "Follow the output spec exactly as written below.\n\n"
+        f"{spec}\n\n"
+        "Return only the final answer in the format required by the spec.")
+        
+
+
+
+
+    def process_restaurant_row(
+            agent,
+            row: dict,
+            spec_text: str,
+            step_callback
+    ) -> dict:
+    #Possible headers for restaurants
+        name = (
                 row.get("restaurant")
                 or row.get("restaurant_name")
                 or row.get("name")
                 or row.get("business")
-                or ""
-            )
-            location_tag = (
+        )
+
+    #Possible headers for locations
+
+        location = (
                 row.get("location")
                 or row.get("location_tag")
                 or row.get("approx_location")
@@ -445,47 +506,57 @@ def _cli():
                 or row.get("neighborhood")
                 or row.get("tag")
                 or ""
+        )
+
+        task = build_research_task(name, location, spec_text)
+
+        try:
+            item_result = run_with_retries(
+                agent,
+                task,
+                step_callback = step_callback,
+                validate_result = validate_nonempty_json_answer
             )
 
-            
+            parsed = extract_first_json_object(item_result["answer"])
+            if parsed is not None:
+                result_value = parsed
+            else:
+                result_value = item_result["answer"]
 
-            task = (
-                "Research this restaurant.\n"
-                f"Restaurant name: {name}\n"
-                f"Approximate location tag: {location_tag}\n"
-                "Follow the output spec exactly as written below.\n\n"
-                f"{spec_text}\n\n"
-                "Return only the final answer in the format required by the spec."
-            )
-            try:
-                item_result = run_with_retries(
-                    agent,
-                    task,
-                    step_callback=step_callback,
-                    validate_result=validate_nonempty_json_answer,
-                )
-                parsed = extract_first_json_object(item_result["answer"])
+            return {
+                "restaurant_name": name,
+                "location": location,
+                "status": "good",
+                "result": result_value,
+                "raw_answer": item_result["answer"]
+            }
+        except Exception as err:
+            return{
+                "restaurant_name": name,
+                "location": location,
+                "status": "failed!",
+                "error": str(err),
+                "result": None,
+                "raw_answer": "  ERR  "
 
-                all_results.append(
-                    {
-                        "restaurant_name": name,
-                        "location_tag": location_tag,
-                        "status": "ok",
-                        "result": parsed if parsed is not None else item_result["answer"],
-                        "raw_answer": item_result["answer"],
-                    }
-                )
-            except Exception as err:
-                all_results.append(
-                    {
-                        "restaurant_name": name,
-                        "location_tag": location_tag,
-                        "status": "failed",
-                        "error": str(err),
-                        "result": None,
-                        "raw_answer": "",
-                    }
-                )
+            }
+
+
+
+    #restaurant addition
+    if cfg.sheet:
+
+        spec_text = load_spec_text(cfg.spec_file)
+        rows = load_restaurant_sheet(cfg.sheet)
+        if not rows:
+            raise RuntimeError(f"No data rows found in sheet: {cfg.sheet}")
+
+        all_results: list[dict[str, t.Any]] = []
+        
+        for row in rows:
+            result = process_restaurant_row(agent, row, spec_text, step_callback)
+            all_results.append(result)
 
 
         result = {
@@ -495,11 +566,15 @@ def _cli():
             "count": len(all_results),
             "results": all_results,
         }
+
+
     else:
         if not cfg.query:
             p.error("Provide either --query or --sheet")
         result = agent.run(cfg.query, step_callback=step_callback)
     # restaurant addition
+
+
 
     
     print("" + "=" * 80)
