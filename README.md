@@ -92,7 +92,7 @@ Question comes -> LLM gets question (conversation history), and tools -> "do I n
 **if LLM doesn't call tools:**
 
   It is done. Extract the output and return the final answer to user
-  
+
 # How to set it up (deployment)
 Since this is a commandline-based program and still requires environment setup, the closest thing to a "deployment" would be to set up the repo on the other person's computer. Hence,
 
@@ -102,14 +102,16 @@ On Windows, open up Powershell
 2. `cd web-research-agent-main` or whatever this directory may be for you
 3. `py -3 -m venv .venv`
 4. `.venv\Scripts\Activate.ps1`
-5. `python -m pip install --upgrade pip`
-6. `pip install -r requirements.txt`
+5. `py -m pip install --upgrade pip build`
+6. `py -m pip install -e .`
+**API setup**
 7. `setx HACKCLUB_API_KEY "YOUR_HACKCLUB_KEY"` Please put your actual Hack Club AI key in "YOUR_HACKCLUB_KEY"
 8. `setx SERPERDEV_API_KEY "YOUR_SERPERDEV_KEY"` Please put your actual Serper.Dev key in "YOUR_SERPERDEV_KEY"
 9. Close powershell
-10. Open a new powershell in the repo's folder
-11. `.venv\Scripts\Activate.ps1`
-12. `python research_agent.py --sheet restaurants.csv --spec-file Examples.md -o output.json`, ensuring that restaurants.csv and Examples.md exists and its contents are adjusted to your liking
+10. Open a new powershell in the repo's folder to run the app (repeat the change directory in step #2)
+11. `.venv\Scripts\Activate.ps1` Activate the environment again
+12. `restaurant-rag --sheet .\restaurants.csv --spec-file .\Examples.md -o .\output.json`, ensuring that restaurants.csv and Examples.md exists and its contents are adjusted to your liking. You can add --debug to see debugging logs, but it is optional
+13. You can see the output JSON in whatever file you specified after -o , or in this case, .\output.json
 
 # How this could be used
 
@@ -136,6 +138,10 @@ Overall I can confidently say that the amount of my code written by the AI is <3
 
 # DEMO:
 
+Here is the project's PiPy url, as requested for this submission
+
+https://pypi.org/project/harry-hctg-voyago-web-research-agent/1.0/
+
 Here is a brief video demo showcasing one runthorugh of the pipeline on a small list of restaurants
 
 https://www.youtube.com/watch?v=_eLFlo78jj0
@@ -151,7 +157,17 @@ Dear HCTG orgs, please note that I am 100% committed to attending HCTG, so if my
 
 
 
-### BELOW IS THE OLD REPO'S README!
+
+
+
+
+
+
+
+
+
+
+### BELOW IS THE OLD REPO'S README (THE REPO I CLONED) !
 
 -----------------------------------------------------------------------------------
 
