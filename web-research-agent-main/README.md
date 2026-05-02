@@ -11,6 +11,38 @@ However, there were two things I need to resolve:
 
 ...and so that's exactly what I did.
 
+# File structure
+
+Examples.md contain a section of the Task Prompt, this file stores and describes the fields which we want the AI to research and provide per restaurant
+
+(fields.md) is NOT it! (idk why I still have that I think it was just inspirational ideas about what fields to add next?)
+
+full_test_list.md contains a full roster of restaurants organized in the CSV format. Simply paste them under the CSV headers in restaurants.csv
+
+Speaking of restaurants.csv. This is the file the program is expected to intake to know the restaurants. Be careful! The header naming and other restrictions is very strict for restaurants.csv! (See around lines 491 - 509)
+
+issues.md is just commentary for future improvements and current speculations of potential failure. The program I find is sufficiently good such that it can collect data thoroughly, and whenever it breaks re-calling it for a certain restaurant would probably work, so given the limited time and the APs I'm not going to bother touch it (archive.txt is also commentary / archive)
+
+output.json is where the outputted data is stored, after the model researches about the restaurants and comes up with answers.
+
+requirements.txt (duh)
+
+research_agent.py THIS IS THE MAIN SCRPT! See below explanation
+
+# Code structure
+
+
++ is big section
+" " (nothing) is small section
+
++ Imports
++ Functions for parsing restaurant.csv
+Mechanism and limitations for retrying
+Validate empty or corrupted outputs
++ + + core research agent class
+  Establish Hackclub LLM endpoint, set API keys
+
+
 # How it works
 
 

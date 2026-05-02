@@ -538,7 +538,7 @@ def _cli():
                 "status": "failed!",
                 "error": str(err),
                 "result": None,
-                "raw_answer": "  ERR  "
+                "raw_answer": "  RAW ANSWER ERR  "
 
             }
 
