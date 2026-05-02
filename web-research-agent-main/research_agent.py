@@ -16,6 +16,11 @@ def strip_thinking(text: str) -> str:
     return _THINK_RE.sub("", text).strip()
 
 
+def debug_log(enabled: bool, message: str) -> None:
+    if enabled:
+        print(f"[DEBUG] {message}")
+
+
 # restaurant parsing functions
 def load_spec_text(spec_path: Path) -> str:
     if not spec_path.exists():
@@ -76,12 +81,14 @@ class ResearchAgent:
         self.model = model
         self.topn = topn
         self.debug = debug
+        debug_log(self.debug, f"init model={self.model} topn={self.topn}")
 
         self.openai_key = hackclub_key or os.getenv("HACKCLUB_API_KEY")
         self.serperdev_key = serperdev_key or os.getenv("SERPERDEV_API_KEY")
         
         if not self.openai_key or not self.serperdev_key:
             raise RuntimeError("HACKCLUB_API_KEY and SERPERDEV_API_KEY must be set.")
+        debug_log(self.debug, "env keys present")
 
         self.client = OpenAI(api_key=self.openai_key,
         base_url = self.HACKCLUB_URL,                     
@@ -138,6 +145,7 @@ class ResearchAgent:
         if self.debug:
             print(f"[DEBUG] → SerperAPI query: '{query}'")
         try:
+            debug_log(self.debug, f"search_web query={query}")
             resp = requests.post(
                 url = "https://google.serper.dev/search",
                 headers = {
@@ -156,6 +164,7 @@ class ResearchAgent:
             data = resp.json()
 
         except Exception as err:
+            debug_log(self.debug, f"search_web error={err}")
             return f"Search error: {err}"
         
         lines: list[str] = []
@@ -233,8 +242,10 @@ class ResearchAgent:
 
         if not lines:
             available = [k for k in data if k != "searchParameters"]
+            debug_log(self.debug, f"search_web no-results keys={available}")
             return f"No results found. (Serper returned keys: {available})"
 
+        debug_log(self.debug, f"search_web items={len(lines)}")
         return "\n".join(lines)
     
     #END RESULT CATEGORISATION SECTION
@@ -262,6 +273,7 @@ class ResearchAgent:
         while True:
             if self.debug:
                 print(f"[DEBUG] API request for model {self.model}")
+            debug_log(self.debug, f"llm request model={self.model} messages={len(messages)}")
 
 
             resp = self.client.chat.completions.create(
@@ -273,6 +285,7 @@ class ResearchAgent:
             msg = resp.choices[0].message
 
             if msg.tool_calls:
+                debug_log(self.debug, f"llm tool_calls={len(msg.tool_calls)}")
                 # append assistant message FIRST (per API contract)
                 tool_calls = []
                 for tc in msg.tool_calls:
@@ -341,6 +354,7 @@ class ResearchAgent:
             
             raw = msg.content or ""
             answer = strip_thinking(raw)
+            debug_log(self.debug, f"llm final chars={len(answer)}")
 
             steps.append({"type": "assistant_answer", "content": answer})
             
@@ -369,10 +383,11 @@ def _cli():
     p.add_argument("-o", "--outfile", type=Path)
     p.add_argument("-d", "--debug", action="store_true")
     cfg = p.parse_args()
+    debug_log(cfg.debug, f"cli query={'yes' if bool(cfg.query) else 'no'} sheet={cfg.sheet}")
 
     if cfg.debug:
         def step_callback(step):
-            pass
+            debug_log(True, f"step={step.get('type')} data={json.dumps(step, ensure_ascii=False)}")
     else:
         step_callback = None
 
@@ -382,11 +397,13 @@ def _cli():
     if cfg.sheet:
         spec_text = load_spec_text(cfg.spec_file)
         rows = load_restaurant_sheet(cfg.sheet)
+        debug_log(cfg.debug, f"loaded spec_file={cfg.spec_file} chars={len(spec_text)}")
+        debug_log(cfg.debug, f"loaded sheet rows={len(rows)} path={cfg.sheet}")
         if not rows:
             raise RuntimeError(f"No data rows found in sheet: {cfg.sheet}")
 
         all_results: list[dict[str, t.Any]] = []
-        for row in rows:
+        for idx, row in enumerate(rows, start=1):
             name = (
                 row.get("restaurant")
                 or row.get("restaurant_name")
@@ -403,6 +420,7 @@ def _cli():
                 or row.get("tag")
                 or ""
             )
+            debug_log(cfg.debug, f"row={idx} restaurant={name!r} location={location_tag!r}")
 
             
 
@@ -416,6 +434,7 @@ def _cli():
             )
             item_result = agent.run(task, step_callback=step_callback)
             parsed = extract_first_json_object(item_result["answer"])
+            debug_log(cfg.debug, f"row={idx} parsed_json={'yes' if parsed is not None else 'no'}")
 
             all_results.append(
                 {
