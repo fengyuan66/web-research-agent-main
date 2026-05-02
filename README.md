@@ -14,7 +14,7 @@ This is an agenetic RAG (Retrieval-Augmented Generation) pipeline for researchin
 
 I need an agenetic RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
 
-Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent
+Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent (THIS PROJECT IS AN ADAPTION OF THIS ORIGINAL REPO! Check license)
 
 However, there were two things I need to resolve:
 
@@ -51,7 +51,7 @@ research_agent.py THIS IS THE MAIN SCRPT! See below explanation
 + Functions for parsing restaurant.csv
 Mechanism and limitations for retrying
 Validate empty or corrupted outputs
-+ + + core research agent class
++    core research agent class
   Establish Hackclub LLM endpoint, set API keys
   + Toolbox definition for the agent!
   + Web searching function
@@ -78,15 +78,20 @@ Validate empty or corrupted outputs
 
 Question comes -> LLM gets question (conversation history), and tools -> "do I need to use my tools to get more knowledge?"
 
-if LLM called tools:
-  Formulate the specific queries
-  Perform search with queries
-  Add results back to conversation
+**One of two decisions:**
+
+**if LLM called tools:**
+  Formulate the specific queries,
+  
+  Perform search with queries,
+  
+  Add results back to conversation,
 
   LLM gets conversation history and tools again (LOOP)
 
-if LLM doesn't call tools:
-  Extract the output and return the final answer to user
+**if LLM doesn't call tools:**
+
+  It is done. Extract the output and return the final answer to user
   
 # How to set it up (deployment)
 Since this is a commandline-based program and still requires environment setup, the closest thing to a "deployment" would be to set up the repo on the other person's computer. Hence,
