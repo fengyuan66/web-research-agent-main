@@ -41,7 +41,11 @@ Mechanism and limitations for retrying
 Validate empty or corrupted outputs
 + + + core research agent class
   Establish Hackclub LLM endpoint, set API keys
-
+  + Toolbox definition for the agent!
+  + Web searching function
+    Sending the query out
+    + Parsing search results (regular web results, Google answer box, Google knowledge panel, geographically local results)
+    
 
 # How it works
 
