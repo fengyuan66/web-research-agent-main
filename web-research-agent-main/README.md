@@ -1,6 +1,6 @@
 # RestaurantRAG README
 
-I need a RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
+I need an agenetic RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
 
 Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent
 
@@ -43,7 +43,7 @@ Validate empty or corrupted outputs
   Establish Hackclub LLM endpoint, set API keys
   + Toolbox definition for the agent!
   + Web searching function
-    *Function we use for searching with Serper.dev API
+    *Function used for searching with Serper.dev API
     + Parsing search results (regular web results, Google answer box, Google knowledge panel, geographically local results)
   + Main loop for the agent
     Logging (debug printing) helper function
@@ -56,12 +56,26 @@ Validate empty or corrupted outputs
   + Command line interface
     + Parse arguments given in command line
     + Helper function to build the task prompt for one specific restaurant
-    + Helper function for Parsing
+    + Helper function for parsing one row from spreadsheet to extract restaurant name and rough location
+    Batch mode (with sheet) vs query mode (singular search)
+    Print and save result
+
 
   
-# How it works
+# How it works (basically)
 
+Question comes -> LLM gets question (conversation history), and tools -> "do I need to use my tools to get more knowledge?"
 
+if LLM called tools:
+  Formulate the specific queries
+  Perform search with queries
+  Add results back to conversation
+
+  LLM gets conversation history and tools again (LOOP)
+
+if LLM doesn't call tools:
+  Extract the output and return the final answer to user
+  
 
 
 # Comments
@@ -73,7 +87,7 @@ things typed in lowercase (and sometimes surrounding blocks of code) mainly just
 
 # AI usage
 
-pls read AI usage. Overall I can confidently say that the amount of functional code written by the AI is within 30%
+pls read AI usage. Overall I can confidently say that the amount of functional code written by the AI is within 30% and used at least in a purposeful and reasonable manner
 
 
 
