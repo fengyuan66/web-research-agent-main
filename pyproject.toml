@@ -24,8 +24,5 @@ dependencies = [
 [project.scripts]
 restaurant-rag = "web_research_agent.research_agent:_cli"
 
-[project.urls]
-Homepage = https://github.com/fengyuan66/web-research-agent-main
-
 [tool.setuptools.packages.find]
 where = ["src"]
