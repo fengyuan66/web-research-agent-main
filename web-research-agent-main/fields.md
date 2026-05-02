@@ -1,0 +1,7 @@
+website
+phone
+address
+hours
+price_range
+google_rating
+review_count
