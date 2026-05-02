@@ -141,7 +141,7 @@ This pipeline is designed in a way that is universal to many tasks. If you are w
 
 # One more thing...
 
-
+Dear HCTG orgs, please note that I am 100% committed to attending HCTG, so if my projects are unable to be approved by May 8th for the 20 hour reduction, pls be soft on the deadline cuz I'll 100% be coming and make the 40 hour total by the later deadline.
 
 
 
