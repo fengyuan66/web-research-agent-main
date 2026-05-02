@@ -3,6 +3,7 @@ import typing as t
 import argparse, json, os
 import csv
 import re
+import time
 import requests
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
@@ -62,6 +63,28 @@ def extract_first_json_object(text: str) -> t.Optional[dict[str, t.Any]]:
             pass
     return None
 # restaurant
+
+
+def run_with_retries(
+    agent: "ResearchAgent",
+    task: str,
+    step_callback: t.Optional[t.Callable[[dict], None]] = None,
+    max_attempts: int = 3,
+    base_backoff_seconds: float = 1.0,
+) -> dict[str, t.Any]:
+    last_err: t.Optional[Exception] = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            return agent.run(task, step_callback=step_callback)
+        except Exception as err:
+            last_err = err
+            if attempt >= max_attempts:
+                break
+            sleep_s = base_backoff_seconds * (2 ** (attempt - 1))
+            if agent.debug:
+                print(f"[DEBUG] row attempt {attempt}/{max_attempts} failed: {err}; retrying in {sleep_s:.1f}s")
+            time.sleep(sleep_s)
+    raise RuntimeError(f"Restaurant processing failed after {max_attempts} attempts: {last_err}")
 
 
 
@@ -432,7 +455,7 @@ def _cli():
                 f"{spec_text}\n\n"
                 "Return only the final answer in the format required by the spec."
             )
-            item_result = agent.run(task, step_callback=step_callback)
+            item_result = run_with_retries(agent, task, step_callback=step_callback)
             parsed = extract_first_json_object(item_result["answer"])
             debug_log(cfg.debug, f"row={idx} parsed_json={'yes' if parsed is not None else 'no'}")
 
