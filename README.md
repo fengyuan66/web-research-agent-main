@@ -14,7 +14,7 @@ This is an agenetic RAG (Retrieval-Augmented Generation) pipeline for researchin
 
 I need an agenetic RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
 
-Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent
+Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent (THIS PROJECT IS AN ADAPTION OF THIS ORIGINAL REPO! Check license)
 
 However, there were two things I need to resolve:
 
