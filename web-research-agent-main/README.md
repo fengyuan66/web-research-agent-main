@@ -1,5 +1,17 @@
 # RestaurantRAG README
 
+# What it is
+
+This is an agenetic RAG (Retrieval-Augmented Generation) pipeline for researching about restaurants. Essentially:
+
+1. You give it a csv containing (restaurant name, general location of restaurant) e.g., (East is East, Vancouver Broadway)
+2. You give it a series of fields you want the AI to fill out after conducting research (e.g., Menu items, price, address, website, etc)
+3. For each restaurant in CSV, the AI autonomously researches that restaurant by (1) making targeted web searches (2) reading the results (3) deciding if it needs more info and do it again (4) reaching a point where it is able to synthesise the findings into an answer
+4. The app returns the LLM-filled contents of the requested fields back to you in a uniform JSON structure
+
+
+# Background
+
 I need an agenetic RAG system that would gather specific info on a bunch of restaurants / places systematically. I tried to build my own, but it ended up working horrible, and fixing it is like stuffing cash into a pocket with a hole in it. 
 
 Luckily, there was a pre-existing RAG system available on Github that I could use -> https://github.com/serpapi/web-research-agent
@@ -76,9 +88,29 @@ if LLM called tools:
 if LLM doesn't call tools:
   Extract the output and return the final answer to user
   
+# How to set it up (deployment)
+Since this is a commandline-based program and still requires environment setup, the closest thing to a "deployment" would be to set up the repo on the other person's computer. Hence,
 
+On Windows, open up Powershell
 
-# Comments
+1. `git clone https://github.com/fengyuan66/web-research-agent-main.git`
+2. `cd web-research-agent-main` or whatever this directory may be for you
+3. `py -3 -m venv .venv`
+4. `.venv\Scripts\Activate.ps1`
+5. `python -m pip install --upgrade pip`
+6. `pip install -r requirements.txt`
+7. `setx HACKCLUB_API_KEY "YOUR_HACKCLUB_KEY"` Please put your actual Hack Club AI key in "YOUR_HACKCLUB_KEY"
+8. `setx SERPERDEV_API_KEY "YOUR_SERPERDEV_KEY"` Please put your actual Serper.Dev key in "YOUR_SERPERDEV_KEY"
+9. Close powershell
+10. Open a new powershell in the repo's folder
+11. `.venv\Scripts\Activate.ps1`
+12. `python research_agent.py --sheet restaurants.csv --spec-file Examples.md -o output.json`, ensuring that restaurants.csv and Examples.md exists and its contents are adjusted to your liking
+
+# How this could be used
+
+I intend on feeding it my list of Vancouver restaurants and using its results to craft a dataset that I can then use to provide context for Voyago's agent, which will learn the user's preference to restaurants in coordination with knowledge of the restaurant's specific traits and thus be able to recommend relevant restaurants to the user.
+
+# Comments guide
 
 In general, THINGS TYPED IN UPPERCASE means to indicate some sort of important variable / customisable element
 
@@ -96,6 +128,16 @@ AI is used mainly for four things in my project:
 AI was not used to write this very README!!!
 
 Overall I can confidently say that the amount of my code written by the AI is <30% and used in a purposeful and reasonable manner
+
+# DEMO:
+
+Here is a brief video demo showcasing one runthorugh of the pipeline on a small list of restaurants
+
+https://www.youtube.com/watch?v=_eLFlo78jj0
+
+# How other people can contribute to it?
+
+This pipeline is designed in a way that is universal to many tasks. If you are wishing to use RAG to research cars, for example, you would only need to change the fields and the prompts. You can also experiement with different web-browsing API, LLM API, or prompts to see which one works best for you and share the insight with the community
 
 # One more thing...
 
