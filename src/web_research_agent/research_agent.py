@@ -215,7 +215,7 @@ class ResearchAgent:
 
     def search_web(self, query: str) -> str:
         if self.debug:
-            print(f"[DEBUG] → SerperAPI query: '{query}'")
+            print(f"[DEBUG] -> SerperAPI query: '{query}'")
         try:
             resp = requests.post(
                 url = "https://google.serper.dev/search",
@@ -583,7 +583,7 @@ def _cli():
 
     if cfg.outfile:
         cfg.outfile.write_text(json.dumps(result, indent=2))
-        print(f"Saved full trace → {cfg.outfile}")
+        print(f"Saved in {cfg.outfile}")
 
 
 if __name__ == "__main__":
