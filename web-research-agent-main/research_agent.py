@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import typing as t
 import argparse, json, os
+import csv
 import re
 import requests
 from pathlib import Path
@@ -13,6 +14,58 @@ from openai import OpenAI
 _THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL)
 def strip_thinking(text: str) -> str:
     return _THINK_RE.sub("", text).strip()
+
+
+# restaurant parsing functions
+def parse_fields_file(fields_path: Path) -> list[str]:
+    if not fields_path.exists():
+        raise RuntimeError(f"Fields file not found: {fields_path}")
+
+    def clean(line: str) -> str:
+        line = line.strip()
+        if not line or line.startswith("#"):
+            return ""
+        line = re.sub(r"^[-*+]\s+|^\d+\.\s+", "", line)
+        line = line.split(":", 1)[0].strip()
+        return line.strip("` ").strip()
+
+    fields = [c for c in map(clean, fields_path.read_text(encoding="utf-8").splitlines()) if c]
+    if not fields:
+        raise RuntimeError(f"No fields found in {fields_path}. Add one field per line (markdown bullets are fine).")
+    return fields
+
+
+def load_restaurant_sheet(sheet_path: Path) -> list[dict[str, str]]:
+    if not sheet_path.exists():
+        raise RuntimeError(f"Sheet file not found: {sheet_path}")
+    suf = sheet_path.suffix.lower()
+    if suf not in {".csv", ".tsv"}:
+        raise RuntimeError("Only .csv and .tsv are supported in this minimal version.")
+
+    with sheet_path.open("r", encoding="utf-8-sig", newline="") as f:
+        if suf == ".tsv":
+            reader = csv.DictReader(f, dialect=csv.excel_tab)
+        else:
+            sample = f.read(2048); f.seek(0)
+            reader = csv.DictReader(f, dialect=csv.Sniffer().sniff(sample or "a,b\n1,2\n", delimiters=",;\t"))
+        return [{str(k).strip().lower(): (v or "").strip() for k, v in row.items() if k} for row in reader]
+
+
+def extract_first_json_object(text: str) -> t.Optional[dict[str, t.Any]]:
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", cleaned)
+    for candidate in (cleaned, re.search(r"\{.*\}", cleaned, re.DOTALL).group(0) if re.search(r"\{.*\}", cleaned, re.DOTALL) else None):
+        if not candidate:
+            continue
+        try:
+            obj = json.loads(candidate)
+            if isinstance(obj, dict):
+                return obj
+        except json.JSONDecodeError:
+            pass
+    return None
+# restaurant
 
 
 
@@ -315,7 +368,11 @@ class ResearchAgent:
 
 def _cli():
     p = argparse.ArgumentParser(description="ResearchAgent CLI")
-    p.add_argument("-q", "--query", required=True)
+    p.add_argument("-q", "--query")
+
+    p.add_argument("--sheet", type=Path)
+    p.add_argument("--fields-file", type=Path, default=Path("fields.md"))
+    
     p.add_argument("-m", "--model", default="gpt-4o", choices=["o3", "o4-mini", "gpt-4o"])
     p.add_argument("-n", "--topn", type=int, default=10)
     p.add_argument("-o", "--outfile", type=Path)
@@ -329,11 +386,73 @@ def _cli():
         step_callback = None
 
     agent = ResearchAgent(model=cfg.model, topn=cfg.topn, debug=cfg.debug)
-    result = agent.run(cfg.query, step_callback=step_callback)
+
+    # restaurant addition
+    if cfg.sheet:
+        fields = parse_fields_file(cfg.fields_file)
+        rows = load_restaurant_sheet(cfg.sheet)
+        if not rows:
+            raise RuntimeError(f"No data rows found in sheet: {cfg.sheet}")
+
+        all_results: list[dict[str, t.Any]] = []
+        for row in rows:
+            name = (
+                row.get("restaurant")
+                or row.get("restaurant_name")
+                or row.get("name")
+                or row.get("business")
+                or ""
+            )
+            location_tag = (
+                row.get("location")
+                or row.get("location_tag")
+                or row.get("approx_location")
+                or row.get("area")
+                or row.get("neighborhood")
+                or row.get("tag")
+                or ""
+            )
+
+            
+
+            task = (
+                "Research this restaurant and return ONLY valid JSON.\n"
+                f"Restaurant name: {name}\n"
+                f"Approximate location tag: {location_tag}\n"
+                f"Required fields (exact keys): {json.dumps(fields)}\n"
+                "Return exactly one JSON object. Use null when unknown."
+            )
+            item_result = agent.run(task, step_callback=step_callback)
+            parsed = extract_first_json_object(item_result["answer"]) or {}
+            normalized = {field: parsed.get(field) for field in fields}
+
+            all_results.append(
+                {
+                    "restaurant_name": name,
+                    "location_tag": location_tag,
+                    "fields": normalized,
+                    "raw_answer": item_result["answer"],
+                }
+            )
+
+
+        result = {
+            "mode": "restaurant_sheet",
+            "sheet": str(cfg.sheet),
+            "fields_file": str(cfg.fields_file),
+            "fields": fields,
+            "count": len(all_results),
+            "results": all_results,
+        }
+    else:
+        if not cfg.query:
+            p.error("Provide either --query or --sheet")
+        result = agent.run(cfg.query, step_callback=step_callback)
+    # restaurant addition
 
     
     print("" + "=" * 80)
-    print(result["answer"])
+    print(result["answer"] if "answer" in result else json.dumps(result, indent=2))
     print("=" * 80)
 
     if cfg.outfile:
