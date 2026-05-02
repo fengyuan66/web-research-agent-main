@@ -43,10 +43,22 @@ Validate empty or corrupted outputs
   Establish Hackclub LLM endpoint, set API keys
   + Toolbox definition for the agent!
   + Web searching function
-    Sending the query out
+    *Function we use for searching with Serper.dev API
     + Parsing search results (regular web results, Google answer box, Google knowledge panel, geographically local results)
-    
+  + Main loop for the agent
+    Logging (debug printing) helper function
+    + Main infinite* loop until answer / conclusion reached
+    + Check + format LLM tool calls
+    *Use function to execute searches in parallel (# of concurrent searches customisable)
+    + Results get added back to conversation, LLM reads it, decides what to do, and the main loop loops
+    -> OR
+    + When LLM is satisfied and decides to not call tools anymore, extract, format, and log the final answer.
+  + Command line interface
+    + Parse arguments given in command line
+    + Helper function to build the task prompt for one specific restaurant
+    + Helper function for Parsing
 
+  
 # How it works
 
 
