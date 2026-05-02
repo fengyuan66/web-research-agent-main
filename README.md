@@ -78,7 +78,9 @@ Validate empty or corrupted outputs
 
 Question comes -> LLM gets question (conversation history), and tools -> "do I need to use my tools to get more knowledge?"
 
-if LLM called tools:
+**One of two decisions:**
+
+**if LLM called tools:**
   Formulate the specific queries,
   
   Perform search with queries,
@@ -87,9 +89,9 @@ if LLM called tools:
 
   LLM gets conversation history and tools again (LOOP)
 
-if LLM doesn't call tools:
+**if LLM doesn't call tools:**
 
-  Extract the output and return the final answer to user
+  It is done. Extract the output and return the final answer to user
   
 # How to set it up (deployment)
 Since this is a commandline-based program and still requires environment setup, the closest thing to a "deployment" would be to set up the repo on the other person's computer. Hence,
