@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-
 import typing as t
 import argparse, json, os
+import re
 import requests
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
@@ -37,7 +37,7 @@ class ResearchAgent:
         self.serperdev_key = serperdev_key or os.getenv("SERPERDEV_API_KEY")
         
         if not self.openai_key or not self.serperdev_key:
-            raise RuntimeError("OPENAI_API_KEY and SERPERDEV_API_KEY must be set.")
+            raise RuntimeError("HACKCLUB_API_KEY and SERPERDEV_API_KEY must be set.")
 
         self.client = OpenAI(api_key=self.openai_key,
         base_url = self.HACKCLUB_URL,                     
@@ -52,7 +52,7 @@ class ResearchAgent:
                         "Search Google and return the top result snippets. "
                         "Use concise, targeted queries. "
                         "You may call this multiple times in a single turn to cover different angles of the question simultaneously."
-                    )
+                    ),
                     "parameters": {
                         "type": "object",
                         "properties": {
@@ -85,6 +85,7 @@ class ResearchAgent:
             "- Be direct and thorough; end with a short summary for complex topics\n"
             "/no_think"
         )
+        self.sys_prompt = self._sys_prompt
 
 #----------------------------------------
 
@@ -96,11 +97,11 @@ class ResearchAgent:
             resp = requests.post(
                 url = "https://google.serper.dev/search",
                 headers = {
-                    "X-API-KEY": os.getenv("SERPERDEV_API_KEY"),
+                    "X-API-KEY": self.serperdev_key,
                     "Content-Type": "application/json",
                 },
 
-                json={"q": query, "num": self.topn}
+                json={"q": query, "num": self.topn},
 
                 #TIMEOUT VARIABLE HERE
 
@@ -207,6 +208,7 @@ class ResearchAgent:
 
 
         step_history: list[dict] = []
+        steps = step_history
 
         def log(step: dict):
             step_history.append(step)
@@ -215,7 +217,7 @@ class ResearchAgent:
 
         while True:
             if self.debug:
-                print("[DEBUG] API request for model {self.model}")
+                print(f"[DEBUG] API request for model {self.model}")
 
 
             resp = self.client.chat.completions.create(
@@ -228,23 +230,23 @@ class ResearchAgent:
 
             if msg.tool_calls:
                 # append assistant message FIRST (per API contract)
+                tool_calls = []
+                for tc in msg.tool_calls:
+                    tool_call_dict = {
+                        "id": tc.id,
+                        "type": "function",
+                        "function": {
+                            "name": tc.function.name,
+                            "arguments": tc.function.arguments,
+                        },
+                    }
+                    tool_calls.append(tool_call_dict)
+
                 messages.append({
                     "role": "assistant",
                     "content": msg.content,
-                    tool_calls = []
-
-                    for tc in msg.tool_calls:
-                        tool_calls_dict = {
-                            "id": tc.id,
-                            "type": "function",
-                            "function": {
-                                "name": tc.function.name,
-                                "arguments": tc.function.arguments,
-                            },
-                        }
-                        tool_calls.append(tool_call_dict)
-                    
-                }
+                    "tool_calls": tool_calls,
+                })
 
                 log({"type": "batch_start", "count": len(msg.tool_calls)})
 
@@ -257,16 +259,16 @@ class ResearchAgent:
                         args = {}
                     query = args.get("query", "")
 
-                    log({"type": "tool_call", "query": question})
+                    log({"type": "tool_call", "query": query})
                     
 
 
                     result = self.search_web(query)
                     result_count = len([l for l in result.split("\n") if l.strip().startswith("-")])
 
-                    log({"type": "tool_result", "query": q, "content": result, "result_count": result_count})
+                    log({"type": "tool_result", "query": query, "content": result, "result_count": result_count})
 
-                    steps.append({"type": "tool_call", "query": q})
+                    steps.append({"type": "tool_call", "query": query})
                     return call.id, result
 
 
@@ -298,7 +300,7 @@ class ResearchAgent:
 
             steps.append({"type": "assistant_answer", "content": answer})
             
-            log({"type": "assistant_answer", "content":})
+            log({"type": "assistant_answer", "content": answer})
 
             result: dict[str, t.Any] = {"question": question, "answer": answer, "steps": steps}
             return result
@@ -320,14 +322,14 @@ def _cli():
     p.add_argument("-d", "--debug", action="store_true")
     cfg = p.parse_args()
 
-    agent = ResearchAgent(model=cfg.model, topn=cfg.topn, debug=cfg.debug)    
-    result = agent.run(cfg.query)
-
     if cfg.debug:
         def step_callback(step):
             pass
     else:
         step_callback = None
+
+    agent = ResearchAgent(model=cfg.model, topn=cfg.topn, debug=cfg.debug)
+    result = agent.run(cfg.query, step_callback=step_callback)
 
     
     print("" + "=" * 80)
