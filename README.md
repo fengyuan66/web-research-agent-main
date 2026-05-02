@@ -51,7 +51,7 @@ research_agent.py THIS IS THE MAIN SCRPT! See below explanation
 + Functions for parsing restaurant.csv
 Mechanism and limitations for retrying
 Validate empty or corrupted outputs
-+ + + core research agent class
++    core research agent class
   Establish Hackclub LLM endpoint, set API keys
   + Toolbox definition for the agent!
   + Web searching function
@@ -79,13 +79,16 @@ Validate empty or corrupted outputs
 Question comes -> LLM gets question (conversation history), and tools -> "do I need to use my tools to get more knowledge?"
 
 if LLM called tools:
-  Formulate the specific queries
-  Perform search with queries
-  Add results back to conversation
+  Formulate the specific queries,
+  
+  Perform search with queries,
+  
+  Add results back to conversation,
 
   LLM gets conversation history and tools again (LOOP)
 
 if LLM doesn't call tools:
+
   Extract the output and return the final answer to user
   
 # How to set it up (deployment)
