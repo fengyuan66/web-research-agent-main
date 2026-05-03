@@ -94,16 +94,17 @@ Question comes -> LLM gets question (conversation history), and tools -> "do I n
   It is done. Extract the output and return the final answer to user
 
 # How to set it up (deployment)
-Since this is a commandline-based program and still requires environment setup, the closest thing to a "deployment" would be to set up the repo on the other person's computer. Hence,
+You can install the package from pip
 
 On Windows, open up Powershell
 
-1. `git clone https://github.com/fengyuan66/web-research-agent-main.git`
-2. `cd web-research-agent-main` or whatever this directory may be for you
+1. Make a new folder for this project
+e.g., `mkdir C:\web-search-agent-main` or whereever you choose
+2. `cd web-research-agent-main` or whatever the project directory may be for you
 3. `py -3 -m venv .venv`
 4. `.venv\Scripts\Activate.ps1`
-5. `py -m pip install --upgrade pip build`
-6. `py -m pip install -e .`
+5. `py -m pip install --upgrade pip` to get latest pip version
+6. `py -m pip install harry-hctg-voyago-web-research-agent` to install the packaged project
 **API setup**
 7. `setx HACKCLUB_API_KEY "YOUR_HACKCLUB_KEY"` Please put your actual Hack Club AI key in "YOUR_HACKCLUB_KEY"
 8. `setx SERPERDEV_API_KEY "YOUR_SERPERDEV_KEY"` Please put your actual Serper.Dev key in "YOUR_SERPERDEV_KEY"
