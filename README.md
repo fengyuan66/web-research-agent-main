@@ -1,5 +1,8 @@
 # RestaurantRAG README
 
+# PSA
+The README on PiPy contains a mistake I forgot to edit after making the project a package! In the event that package installation instructions are needed please refer to this README
+
 # What it is
 
 This is an agenetic RAG (Retrieval-Augmented Generation) pipeline for researching about restaurants. Essentially:
